@@ -21,32 +21,40 @@ export default function FoundersNote() {
   ]
 
   return (
-    <section id="founders-note" ref={ref} className="py-32 px-6 sm:px-8 lg:px-12 bg-charcoal/30">
-      <div className="max-w-4xl mx-auto">
+    <section 
+      id="founders-note" 
+      ref={ref} 
+      className="py-24 sm:py-32 lg:py-40 px-6 sm:px-8 lg:px-12 bg-charcoal/30"
+      aria-labelledby="founders-note-heading"
+    >
+      <div className="max-w-5xl mx-auto">
         <motion.div
-          className="mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8 }}
+          className="mb-10 sm:mb-12 lg:mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-ivory mb-4">
+          <h2 
+            id="founders-note-heading"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-ivory mb-4 font-medium"
+          >
             Founder's Note
           </h2>
         </motion.div>
 
-        <div className="space-y-6">
+        <div className="space-y-5 sm:space-y-6 lg:space-y-8">
           {paragraphs.map((paragraph, index) => (
             <motion.p
               key={index}
-              className={`text-lg sm:text-xl text-sand/90 font-light leading-relaxed ${
-                index === paragraphs.length - 1 ? 'text-right' : ''
+              className={`text-base sm:text-lg lg:text-xl text-sand/95 font-light leading-relaxed ${
+                index === paragraphs.length - 1 ? 'text-right sm:text-right' : ''
               }`}
               initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
               transition={{
-                duration: 0.8,
-                delay: index * 0.1,
-                ease: 'easeOut',
+                duration: 0.5,
+                delay: index * 0.08,
+                ease: [0.4, 0, 0.2, 1],
               }}
             >
               {paragraph}
@@ -55,14 +63,14 @@ export default function FoundersNote() {
         </div>
 
         <motion.div
-          className="mt-12 text-right"
+          className="mt-10 sm:mt-12 lg:mt-16 text-right"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.8, delay: 0.9 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
         >
-          <p className="text-rose-gold font-serif text-lg">
+          <p className="text-rose-gold font-serif text-lg sm:text-xl">
             — Josephine Turkson<br />
-            Founder, Novaira
+            <span className="text-base sm:text-lg">Founder, Novaira</span>
           </p>
         </motion.div>
       </div>

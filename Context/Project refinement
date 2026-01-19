@@ -1,0 +1,30 @@
+# Project Context
+This is the Novaira web app: a premium product platform for an empathetic, beautifully designed sanitary pad burner. The current content is complete but simple static. I want:
+
+- World-class UI upgrade for modern web design excellence.
+- Polished visuals with consistent typography, spacing, color system.
+- Fully responsive and accessible interface.
+- Polished micro-interactions and micro-animations.
+- Clear user flow and emotional resonance aligned with the brand mission.
+
+# Design Goals
+- Very clean, minimal, premium aesthetic
+- Typography hierarchy with consistent scale
+- Subtle animations (hover states, reveal on scroll)
+- Professional hero section with strong value proposition
+
+# Content Structure
+Use current sections: Story, Product, How It Works, Philosophy, Contact. Refine copy to be succinct, elegant, and emotionally engaging. Replace placeholders with refined design elements.
+
+# Constraints
+- Maintain existing routing and functionality
+- Keep SEO best practices
+- Improve accessibility
+- Use utility-first CSS or design system
+
+# Deliverables
+1. Redesigned homepage UI
+2. Redesigned inner section templates
+3. Enhanced form + modal flows
+4. Responsive behavior checks
+5. Accessibility compliance improvements
