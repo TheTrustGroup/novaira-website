@@ -187,7 +187,7 @@ If connected to Vercel/Netlify:
 
 **Current Configuration:**
 - ✅ Domain updated in `app/layout.tsx` metadata
-- ✅ Email updated to `hello@novairaworld.com`
+- ✅ Email updated to `office@novairaworld.com`
 - ⏳ DNS records need to be configured at your domain registrar
 - ⏳ Domain needs to be added in deployment platform (Vercel/Netlify)
 

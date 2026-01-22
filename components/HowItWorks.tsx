@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { Inbox, Power, Sparkles, CheckCircle } from 'lucide-react'
+import { Inbox, Power, RefreshCw, CheckCircle } from 'lucide-react'
 
 export default function HowItWorks() {
   const ref = useRef(null)
@@ -22,7 +22,7 @@ export default function HowItWorks() {
       description: 'One touch begins the process silently.',
     },
     {
-      icon: Sparkles,
+      icon: RefreshCw,
       title: 'Process',
       description: 'Advanced technology works discreetly.',
     },
@@ -103,10 +103,10 @@ export default function HowItWorks() {
         {/* Steps Container */}
         <div ref={containerRef} className="relative">
           {/* Timeline Line - Desktop Horizontal */}
-          <div className="hidden lg:block absolute left-0 right-0 top-1/2 h-px bg-gradient-to-r from-rose-gold/20 via-rose-gold/30 to-rose-gold/20 transform -translate-y-1/2" />
+          <div className="hidden lg:block absolute left-0 right-0 top-1/2 h-px bg-gradient-to-r from-rose-gold/20 via-rose-gold/30 to-rose-gold/20 transform -translate-y-1/2 z-0 pointer-events-none" />
           
           {/* Timeline Line - Mobile Vertical */}
-          <div className="lg:hidden absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-rose-gold/20 via-rose-gold/30 to-rose-gold/20" />
+          <div className="lg:hidden absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-rose-gold/20 via-rose-gold/30 to-rose-gold/20 z-0 pointer-events-none" />
           
           {/* Steps Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 sm:gap-12 lg:gap-8 relative">
@@ -120,10 +120,10 @@ export default function HowItWorks() {
                   variants={cardVariants}
                   initial="hidden"
                   animate={isInView ? 'visible' : 'hidden'}
-                  className="relative lg:pl-0 pl-12"
+                  className="relative lg:pl-0 pl-12 z-10"
                 >
                   {/* Timeline Connector - Desktop Horizontal */}
-                  <div className="hidden lg:block absolute left-1/2 top-1/2 w-3 h-3 -translate-x-1/2 -translate-y-1/2 z-10">
+                  <div className="hidden lg:block absolute left-1/2 top-1/2 w-3 h-3 -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none">
                     <motion.div
                       className="w-full h-full rounded-full bg-charcoal border-2 border-rose-gold/30"
                       initial={{ scale: 0, opacity: 0 }}
@@ -150,7 +150,7 @@ export default function HowItWorks() {
                   </div>
 
                   {/* Timeline Connector - Mobile Vertical */}
-                  <div className="lg:hidden absolute left-8 top-6 w-3 h-3 -translate-x-1/2 z-10">
+                  <div className="lg:hidden absolute left-8 top-6 w-3 h-3 -translate-x-1/2 z-0 pointer-events-none">
                     <motion.div
                       className="w-full h-full rounded-full bg-charcoal border-2 border-rose-gold/30"
                       initial={{ scale: 0, opacity: 0 }}
@@ -167,7 +167,7 @@ export default function HowItWorks() {
 
                   {/* Step Card */}
                   <motion.article
-                    className="relative h-full bg-charcoal/50 backdrop-blur-sm border border-rose-gold/10 rounded-lg p-6 sm:p-8 hover:border-rose-gold/30 transition-all duration-500 group"
+                    className="relative h-full bg-charcoal/50 backdrop-blur-sm border border-rose-gold/10 rounded-lg p-6 sm:p-8 hover:border-rose-gold/30 transition-all duration-500 group z-0"
                     whileHover={{ y: -4 }}
                   >
                     {/* Icon Container */}
@@ -202,10 +202,10 @@ export default function HowItWorks() {
                       </div>
                     </div>
 
-                    {/* Step Number */}
-                    <div className="text-center mb-4">
-                      <span className="text-xs sm:text-sm text-rose-gold/60 font-light tracking-wider uppercase">
-                        Step {String(index + 1).padStart(2, '0')}
+                    {/* Step Number - Fixed spacing to prevent overlap */}
+                    <div className="text-center mb-4 relative z-10 px-2">
+                      <span className="text-xs sm:text-sm text-rose-gold/60 font-light tracking-wider uppercase inline-block whitespace-nowrap">
+                        STEP {String(index + 1).padStart(2, '0')}
                       </span>
                     </div>
 

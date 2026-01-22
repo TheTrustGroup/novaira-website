@@ -70,12 +70,12 @@ export default function CallToAction() {
               <span>+1 (234) 567-890</span>
             </a>
             <a
-              href="mailto:hello@novairaworld.com"
+              href="mailto:office@novairaworld.com"
               className="flex items-center gap-3 hover:text-rose-gold transition-colors duration-300 font-light focus:outline-none focus:ring-2 focus:ring-rose-gold focus:ring-offset-2 focus:ring-offset-charcoal rounded px-2 py-1"
-              aria-label="Email us at hello@novairaworld.com"
+              aria-label="Email us at office@novairaworld.com"
             >
               <Mail className="w-5 h-5" aria-hidden="true" />
-              <span>hello@novairaworld.com</span>
+              <span>office@novairaworld.com</span>
             </a>
           </motion.div>
 

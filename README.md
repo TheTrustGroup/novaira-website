@@ -102,7 +102,7 @@ The site is optimized for Vercel's platform with automatic Next.js optimization.
 
 Update contact details in `components/CallToAction.tsx`:
 - Phone: `+1 (234) 567-890`
-- Email: `hello@novairaworld.com`
+- Email: `office@novairaworld.com`
 
 ## 🎯 Brand Guidelines
 
