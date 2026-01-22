@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { Heart, Sparkles, Wrench, Leaf, Shield } from 'lucide-react'
+import { Heart, Award, Wrench, Leaf, Shield } from 'lucide-react'
 
 export default function BrandPhilosophy() {
   const ref = useRef(null)
@@ -16,7 +16,7 @@ export default function BrandPhilosophy() {
       description: 'We design by listening. Every product begins with understanding real experiences and real emotions.',
     },
     {
-      icon: Sparkles,
+      icon: Award,
       title: 'Dignity by Design',
       description: 'We believe hygiene solutions should feel respectful, private, and reassuring — never clinical or uncomfortable.',
     },

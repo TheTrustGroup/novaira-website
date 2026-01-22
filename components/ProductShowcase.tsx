@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { Shield, VolumeX, Sparkles, Heart, Leaf, ZoomIn } from 'lucide-react'
+import { Shield, VolumeX, Hand, Heart, Leaf, ZoomIn } from 'lucide-react'
 import Lightbox from './Lightbox'
 
 export default function ProductShowcase() {
@@ -52,7 +52,7 @@ export default function ProductShowcase() {
 
   const features = [
     {
-      icon: Sparkles,
+      icon: Hand,
       title: 'Intuitive to Use',
       description: 'Every interaction is crafted to create a sense of calm. Nothing harsh. Nothing intimidating.',
     },
