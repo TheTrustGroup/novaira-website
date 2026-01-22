@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Novaira' }],
   creator: 'Novaira',
   publisher: 'Novaira',
-  metadataBase: new URL('https://novaira.com'),
+  metadataBase: new URL('https://novairaworld.com'),
   alternates: {
     canonical: '/',
   },
