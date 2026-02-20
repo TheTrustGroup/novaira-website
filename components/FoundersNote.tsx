@@ -1,22 +1,29 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
+import Image from 'next/image'
+
+// Place the real founder photo at: public/images/founder-josephine.jpg
+const FOUNDER_IMAGE_PATH = '/images/founder-josephine.jpg'
 
 export default function FoundersNote() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const [imageError, setImageError] = useState(false)
+  const showPlaceholder = imageError
 
   const paragraphs = [
-    'Novaira began with a quiet question:',
+    'NOVAIRA began with a quiet question:',
     'Why should something so essential feel so overlooked?',
     'In spaces meant for comfort — homes, workplaces, schools, hospitals — menstrual hygiene solutions often felt purely functional, cold, or hidden away. They solved a problem, but they never considered the person. I believed we could do better.',
-    'Novaira was created to bring dignity, thoughtfulness, and design into a space that has long been ignored. Not through loud statements or uncomfortable conversations, but through calm, beautiful, and intentional engineering.',
-    'Every Novaira product is designed with empathy at its core. From the first interaction to the last, our goal is simple: to make people feel at ease. To replace hesitation with confidence. To ensure that privacy is respected and comfort is preserved.',
+    'NOVAIRA was created to bring dignity, thoughtfulness, and design into a space that has long been ignored. Not through loud statements or uncomfortable conversations, but through calm, beautiful, and intentional engineering.',
+    'Every NOVAIRA unit is designed with empathy at its core. From the first interaction to the last, our goal is simple: to make people feel at ease. To replace hesitation with confidence. To ensure that privacy is respected and comfort is preserved.',
     'This isn\'t just about technology.',
     'It\'s about acknowledging real human experiences — and responding with care.',
-    'Novaira is our way of saying that thoughtful design belongs everywhere, especially where it matters most.',
+    'NOVAIRA is our way of saying that thoughtful design belongs everywhere, especially where it matters most.',
     'Thank you for being part of this journey.',
   ]
 
@@ -42,7 +49,33 @@ export default function FoundersNote() {
           </h2>
         </motion.div>
 
-        <div className="space-y-5 sm:space-y-6 lg:space-y-8">
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-14 mb-12 lg:mb-16">
+          <motion.figure
+            className="flex-shrink-0 lg:w-72"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            {showPlaceholder ? (
+              <div
+                className="w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 rounded-full bg-charcoal/70 border border-rose-gold/20 flex items-center justify-center mx-auto lg:mx-0"
+                aria-hidden="true"
+              >
+                <span className="text-3xl sm:text-4xl lg:text-5xl font-serif text-rose-gold/80">JT</span>
+              </div>
+            ) : (
+              <Image
+                src={FOUNDER_IMAGE_PATH}
+                alt="Josephine Turkson, Founder of NOVAIRA"
+                width={288}
+                height={288}
+                className="w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 rounded-full object-cover mx-auto lg:mx-0 border border-rose-gold/20"
+                onError={() => setImageError(true)}
+              />
+            )}
+          </motion.figure>
+
+          <div className="flex-1 space-y-5 sm:space-y-6 lg:space-y-8">
           {paragraphs.map((paragraph, index) => (
             <motion.p
               key={index}
@@ -60,6 +93,7 @@ export default function FoundersNote() {
               {paragraph}
             </motion.p>
           ))}
+          </div>
         </div>
 
         <motion.div
@@ -70,7 +104,7 @@ export default function FoundersNote() {
         >
           <p className="text-rose-gold font-serif text-lg sm:text-xl">
             — Josephine Turkson<br />
-            <span className="text-base sm:text-lg">Founder, Novaira</span>
+            <span className="text-base sm:text-lg">Founder, NOVAIRA</span>
           </p>
         </motion.div>
       </div>

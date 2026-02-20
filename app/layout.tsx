@@ -1,40 +1,46 @@
 import type { Metadata, Viewport } from 'next'
+import { PosthogProvider } from '@/components/PosthogProvider'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Novaira — Luxury Sanitary Pad Burner | Dignity Deserves Design',
-  description: 'Dignity deserves design. Novaira creates ultra-modern sanitary pad burners that feel less like machines and more like a natural part of a refined, welcoming space.',
-  keywords: 'luxury sanitary pad burner, discreet disposal, dignity, menstrual care, premium wellness technology, Novaira',
-  authors: [{ name: 'Novaira' }],
-  creator: 'Novaira',
-  publisher: 'Novaira',
-  metadataBase: new URL('https://novairaworld.com'),
-  alternates: {
-    canonical: '/',
+  title: {
+    default: 'NOVAIRA — Luxury Sanitary Disposal for Hotels & Institutions',
+    template: '%s | NOVAIRA',
   },
+  description:
+    'NOVAIRA series 1 is a CE & ISO certified premium sanitary disposal system for luxury hotels, hospitals, schools and offices. Request a product specification sheet.',
+  keywords: [
+    'sanitary pad disposal',
+    'menstrual waste disposal',
+    'luxury sanitary disposal unit',
+    'pad incinerator hotels',
+    'menstrual hygiene B2B',
+    'institutional hygiene solutions',
+  ],
+  authors: [{ name: 'NOVAIRA' }],
+  creator: 'NOVAIRA',
+  publisher: 'NOVAIRA',
+  metadataBase: new URL('https://novairaworld.com'),
+  alternates: { canonical: 'https://novairaworld.com' },
   openGraph: {
-    title: 'Novaira — Luxury Sanitary Pad Burner',
-    description: 'Dignity deserves design. This is hygiene, redefined.',
+    title: 'NOVAIRA — Hygiene, Redefined',
+    description:
+      'Premium sanitary disposal technology designed with empathy for luxury hotels, hospitals and institutions.',
     type: 'website',
+    url: 'https://novairaworld.com',
     locale: 'en_US',
-    siteName: 'Novaira',
+    siteName: 'NOVAIRA',
+    images: [
+      { url: '/og-image.jpg', width: 1200, height: 630, alt: 'NOVAIRA' },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Novaira — Luxury Sanitary Pad Burner',
-    description: 'Dignity deserves design. This is hygiene, redefined.',
+    title: 'NOVAIRA',
+    description: 'Luxury sanitary disposal technology.',
+    images: ['/og-image.jpg'],
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
+  robots: { index: true, follow: true },
 }
 
 export const viewport: Viewport = {
@@ -51,7 +57,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <PosthogProvider>{children}</PosthogProvider>
+      </body>
     </html>
   )
 }

@@ -12,17 +12,17 @@ export default function TrustSafety() {
   const certifications = [
     {
       icon: Award,
-      title: 'CE Certified',
+      title: 'CE Certified — Safety & EMC',
       description: 'Meets European safety and quality standards.',
     },
     {
       icon: Shield,
-      title: 'ISO Certified',
+      title: 'ISO 9001:2015 — Quality Management',
       description: 'International quality management standards.',
     },
     {
       icon: CheckCircle,
-      title: 'Medical Grade',
+      title: 'Medical Grade Materials',
       description: 'Designed for healthcare environments.',
     },
     {
@@ -85,6 +85,21 @@ export default function TrustSafety() {
             )
           })}
         </div>
+
+        <motion.p
+          className="text-center text-sm text-sand/75 font-light mb-16 sm:mb-20"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.5, delay: 0.35 }}
+        >
+          Certification documentation available upon request during consultation. Contact{' '}
+          <a
+            href="mailto:office@novairaworld.com"
+            className="text-rose-gold hover:underline focus:outline-none focus:ring-2 focus:ring-rose-gold focus:ring-offset-2 focus:ring-offset-charcoal rounded"
+          >
+            office@novairaworld.com
+          </a>
+        </motion.p>
 
         <motion.div
           className="max-w-5xl mx-auto p-8 sm:p-12 border border-rose-gold/20 bg-charcoal/50 backdrop-blur-sm rounded-lg"

@@ -3,12 +3,10 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
-import ConsultationModal from './ConsultationModal'
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,6 +33,8 @@ export default function Navigation() {
     { label: 'Product', href: '#product' },
     { label: 'How It Works', href: '#how-it-works' },
     { label: 'About', href: '#founders-note' },
+    { label: 'Pilot', href: '#pilot-program' },
+    { label: 'Press', href: '#press' },
     { label: 'Contact', href: '#contact' },
   ]
 
@@ -63,18 +63,20 @@ export default function Navigation() {
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="flex items-center justify-between h-20">
             <motion.a
-              href="#"
+              href="/"
               className="text-2xl font-serif text-rose-gold focus:outline-none focus:ring-2 focus:ring-rose-gold focus:ring-offset-2 focus:ring-offset-charcoal rounded transition-colors duration-300"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
               onClick={(e) => {
-                e.preventDefault()
-                window.scrollTo({ top: 0, behavior: 'smooth' })
+                if (window.location.pathname === '/') {
+                  e.preventDefault()
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }
               }}
-              aria-label="Novaira - Home"
+              aria-label="NOVAIRA - Home"
             >
-              Novaira
+              NOVAIRA
             </motion.a>
 
             {/* Desktop Navigation */}
@@ -99,16 +101,20 @@ export default function Navigation() {
             </div>
 
             {/* Desktop CTA Button */}
-            <motion.button
-              className="hidden md:block px-6 py-2.5 border border-rose-gold/50 text-rose-gold hover:bg-rose-gold hover:text-charcoal transition-all duration-300 text-sm font-light focus:outline-none focus:ring-2 focus:ring-rose-gold focus:ring-offset-2 focus:ring-offset-charcoal rounded"
+            <motion.a
+              href="#contact"
+              className="hidden md:block px-6 py-2.5 border border-rose-gold/50 text-rose-gold hover:bg-rose-gold hover:text-charcoal transition-all duration-300 text-sm font-light focus:outline-none focus:ring-2 focus:ring-rose-gold focus:ring-offset-2 focus:ring-offset-charcoal rounded no-underline"
               whileHover={{ scale: 1.02, y: -1 }}
               whileTap={{ scale: 0.98 }}
               transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-              onClick={() => setIsModalOpen(true)}
+              onClick={(e) => {
+                e.preventDefault()
+                handleNavClick('#contact')
+              }}
               aria-label="Request consultation"
             >
               Request Consultation
-            </motion.button>
+            </motion.a>
 
             {/* Mobile Menu Button */}
             <button
@@ -168,26 +174,27 @@ export default function Navigation() {
                     {item.label}
                   </motion.a>
                 ))}
-                <motion.button
-                  className="mt-8 px-8 py-3 bg-rose-gold text-charcoal hover:bg-rose-blush transition-all duration-300 text-sm font-light focus:outline-none focus:ring-2 focus:ring-rose-gold focus:ring-offset-2 focus:ring-offset-charcoal rounded"
+                <motion.a
+                  href="#contact"
+                  className="mt-8 inline-block px-8 py-3 bg-rose-gold text-charcoal hover:bg-rose-blush transition-all duration-300 text-sm font-light focus:outline-none focus:ring-2 focus:ring-rose-gold focus:ring-offset-2 focus:ring-offset-charcoal rounded no-underline"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
                   transition={{ delay: navItems.length * 0.1, duration: 0.3 }}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault()
                     setMobileMenuOpen(false)
-                    setIsModalOpen(true)
+                    handleNavClick('#contact')
                   }}
                 >
                   Request Consultation
-                </motion.button>
+                </motion.a>
               </nav>
             </motion.div>
           </>
         )}
       </AnimatePresence>
 
-      <ConsultationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   )
 }

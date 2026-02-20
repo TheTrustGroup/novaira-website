@@ -95,7 +95,7 @@ export default function BrandPhilosophy() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            Novaira aims to become the global benchmark for refined hygiene technology, where innovation is felt not through complexity, but through calm simplicity.
+            NOVAIRA aims to become the global benchmark for refined hygiene technology, where innovation is felt not through complexity, but through calm simplicity.
           </motion.p>
         </motion.div>
 
@@ -146,7 +146,7 @@ export default function BrandPhilosophy() {
             This is dignity, designed.
           </p>
           <p className="text-base sm:text-lg text-sand/70 font-light mt-6 sm:mt-8">
-            Welcome to Novaira.
+            Welcome to NOVAIRA.
           </p>
         </motion.div>
       </div>

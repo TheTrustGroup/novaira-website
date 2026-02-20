@@ -11,6 +11,8 @@ export default function Footer() {
     { label: 'Product', href: '#product' },
     { label: 'How It Works', href: '#how-it-works' },
     { label: 'Philosophy', href: '#philosophy' },
+    { label: 'Pilot', href: '#pilot-program' },
+    { label: 'Press', href: '#press' },
     { label: 'Contact', href: '#contact' },
   ]
 
@@ -25,9 +27,9 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12 mb-10 sm:mb-12">
           <div>
-            <h3 className="text-2xl sm:text-3xl font-serif text-rose-gold mb-4 font-medium">Novaira</h3>
+            <h3 className="text-2xl sm:text-3xl font-serif text-rose-gold mb-4 font-medium">NOVAIRA</h3>
             <p className="text-sand/75 font-light text-sm sm:text-base leading-relaxed max-w-sm">
-              Dignity deserves design. This is hygiene, redefined.
+              Premium sanitary disposal for hotels, hospitals, schools & offices. CE & ISO certified.
             </p>
           </div>
 
@@ -77,17 +79,17 @@ export default function Footer() {
 
         <div className="border-t border-rose-gold/10 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-sand/65 text-xs sm:text-sm font-light">
-            © {currentYear} Novaira. All rights reserved.
+            © {currentYear} NOVAIRA. All rights reserved.
           </p>
           <div className="flex flex-wrap gap-4 sm:gap-6 text-xs sm:text-sm">
             <a 
-              href="#" 
+              href="/privacy" 
               className="text-sand/65 hover:text-rose-gold transition-colors duration-300 font-light focus:outline-none focus:ring-2 focus:ring-rose-gold focus:ring-offset-2 focus:ring-offset-charcoal rounded px-1"
             >
               Privacy Policy
             </a>
             <a 
-              href="#" 
+              href="/terms" 
               className="text-sand/65 hover:text-rose-gold transition-colors duration-300 font-light focus:outline-none focus:ring-2 focus:ring-rose-gold focus:ring-offset-2 focus:ring-offset-charcoal rounded px-1"
             >
               Terms of Service

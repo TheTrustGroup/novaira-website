@@ -1,6 +1,6 @@
-# Novaira — Luxury Sanitary Pad Burner Website
+# NOVAIRA — Luxury Sanitary Pad Burner Website
 
-A world-class, cinematic website for Novaira, a luxury sanitary pad burner company. This digital experience removes stigma, provides comfort, and creates a premium brand presence. Built on the belief that dignity deserves design.
+A world-class, cinematic website for NOVAIRA, a luxury sanitary pad burner company. This digital experience removes stigma, provides comfort, and creates a premium brand presence. Built on the belief that dignity deserves design.
 
 ## 🚀 Quick Start
 
@@ -36,7 +36,7 @@ novaira-burner-website/
 │   ├── EmotionalStory.tsx   # Poetic storytelling with staggered reveals
 │   ├── ProductShowcase.tsx  # 5 key features with luxury presentation
 │   ├── HowItWorks.tsx       # Simple 3-step process
-│   ├── WhereItBelongs.tsx   # 5 environment showcases
+│   ├── EnvironmentSelector.tsx  # Environment showcases
 │   ├── TrustSafety.tsx      # Certifications & safety reassurance
 │   ├── BrandPhilosophy.tsx  # Purpose, values, and emotional core
 │   ├── CallToAction.tsx     # Soft, reassuring consultation CTA
@@ -101,7 +101,6 @@ The site is optimized for Vercel's platform with automatic Next.js optimization.
 ## 📞 Contact Information
 
 Update contact details in `components/CallToAction.tsx`:
-- Phone: `+1 (234) 567-890`
 - Email: `office@novairaworld.com`
 
 ## 🎯 Brand Guidelines

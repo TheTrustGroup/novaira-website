@@ -9,11 +9,11 @@ export default function EmotionalStory() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   const lines = [
-    'Novaira was born from a simple yet powerful belief:',
+    'NOVAIRA was born from a simple yet powerful belief:',
     'dignity deserves design.',
     'For generations, conversations around menstrual care',
     'have been hidden behind discomfort, silence, and compromise.',
-    'Novaira exists to change that —',
+    'NOVAIRA exists to change that —',
     'not loudly, not aggressively —',
     'but beautifully, thoughtfully, and respectfully.',
   ]

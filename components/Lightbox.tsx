@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState, useCallback, useRef } from 'react'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 
@@ -29,7 +30,7 @@ export default function Lightbox({
   const [touchEnd, setTouchEnd] = useState<number | null>(null)
   const [imageLoaded, setImageLoaded] = useState(false)
   const [imageError, setImageError] = useState(false)
-  const imageRef = useRef<HTMLImageElement>(null)
+  const imageRef = useRef<HTMLImageElement | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const minSwipeDistance = 50
 
@@ -259,17 +260,21 @@ export default function Lightbox({
                       </p>
                     </div>
                   ) : (
-                    <img
-                      ref={imageRef}
-                      src={currentImage.src}
-                      alt={currentImage.alt}
-                      id="lightbox-image"
-                      className="max-w-full max-h-[90vh] w-auto h-auto object-contain"
-                      onLoad={handleImageLoad}
-                      onError={handleImageError}
-                      loading="lazy"
-                      draggable={false}
-                    />
+                    <div className="relative w-full h-[70vh] min-h-[300px] max-h-[90vh]">
+                      <Image
+                        ref={imageRef}
+                        src={currentImage.src}
+                        alt={currentImage.alt}
+                        id="lightbox-image"
+                        fill
+                        sizes="100vw"
+                        className="object-contain"
+                        onLoad={handleImageLoad}
+                        onError={handleImageError}
+                        loading="lazy"
+                        draggable={false}
+                      />
+                    </div>
                   )}
                 </motion.div>
 

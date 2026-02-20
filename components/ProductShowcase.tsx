@@ -1,9 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { useState, useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 import { Shield, VolumeX, Hand, Heart, Leaf, ZoomIn } from 'lucide-react'
 import Lightbox from './Lightbox'
 
@@ -17,25 +15,25 @@ export default function ProductShowcase() {
   const productImages = [
     {
       src: '/images/product-1.jpg',
-      alt: 'Novaira sanitary pad burner in a modern bathroom setting',
+      alt: 'NOVAIRA sanitary disposal unit in a modern bathroom setting',
       title: 'Modern Bathroom Integration',
       thumbnail: '/images/product-1-thumb.jpg',
     },
     {
       src: '/images/product-2.jpg',
-      alt: 'Close-up view of Novaira product showing elegant design details',
+      alt: 'Close-up view of NOVAIRA showing elegant design details',
       title: 'Elegant Design Details',
       thumbnail: '/images/product-2-thumb.jpg',
     },
     {
       src: '/images/product-3.jpg',
-      alt: 'Novaira product in a luxury hotel bathroom environment',
+      alt: 'NOVAIRA in a luxury hotel bathroom environment',
       title: 'Luxury Hotel Environment',
       thumbnail: '/images/product-3-thumb.jpg',
     },
     {
       src: '/images/product-4.jpg',
-      alt: 'Novaira product showcasing minimalist aesthetic',
+      alt: 'NOVAIRA showcasing minimalist aesthetic',
       title: 'Minimalist Aesthetic',
       thumbnail: '/images/product-4-thumb.jpg',
     },
@@ -99,7 +97,7 @@ export default function ProductShowcase() {
             Design With Empathy
           </h2>
           <p className="text-lg sm:text-xl text-sand/85 max-w-3xl mx-auto font-light leading-relaxed">
-            At Novaira, technology begins with empathy. We understand that hygiene is not just functional — it is emotional.
+            NOVAIRA begins with empathy. We understand that hygiene is not just functional — it is emotional.
           </p>
         </motion.div>
 
@@ -152,11 +150,8 @@ export default function ProductShowcase() {
                     <p className="text-xs sm:text-sm text-sand/50 font-light">{image.title}</p>
                   </div>
                 </div>
-                
                 {/* Overlay on hover */}
-                <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/20 transition-colors duration-300 flex items-center justify-center">
-                  <ZoomIn className="w-8 h-8 text-rose-gold opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
+                <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/20 transition-colors duration-300 pointer-events-none" aria-hidden />
               </motion.button>
             ))}
           </div>
