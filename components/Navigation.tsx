@@ -1,201 +1,154 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+/**
+ * Job: Same-page anchors + primary pilot CTA — three links only.
+ */
+import { useEffect, useState } from 'react'
+import { NovairaLogo } from '@/components/NovairaLogo'
+
+const NAV_ITEMS = [
+  { label: 'How It Works', href: '#how-it-works' },
+  { label: 'Pilot', href: '#pilot-program' },
+  { label: 'Contact', href: '#contact' },
+] as const
+
+function scrollToHash(href: string) {
+  document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
-    }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    const onScroll = () => setScrolled(window.scrollY > 40)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   useEffect(() => {
-    // Prevent body scroll when mobile menu is open
-    if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'unset'
-    }
+    document.body.style.overflow = mobileOpen ? 'hidden' : ''
     return () => {
-      document.body.style.overflow = 'unset'
+      document.body.style.overflow = ''
     }
-  }, [mobileMenuOpen])
-
-  const navItems = [
-    { label: 'Story', href: '#story' },
-    { label: 'Product', href: '#product' },
-    { label: 'How It Works', href: '#how-it-works' },
-    { label: 'About', href: '#founders-note' },
-    { label: 'Pilot', href: '#pilot-program' },
-    { label: 'Press', href: '#press' },
-    { label: 'Contact', href: '#contact' },
-  ]
-
-  const handleNavClick = (href: string) => {
-    setMobileMenuOpen(false)
-    // Smooth scroll to section
-    const element = document.querySelector(href)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
-  }
+  }, [mobileOpen])
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? 'bg-charcoal/95 backdrop-blur-md border-b border-rose-gold/20'
-            : 'bg-transparent'
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
+          scrolled ? 'bg-ink/95 border-b border-gold/15 backdrop-blur-md' : 'bg-transparent'
         }`}
-        aria-label="Main navigation"
       >
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="flex items-center justify-between h-20">
-            <motion.a
-              href="/"
-              className="text-2xl font-serif text-rose-gold focus:outline-none focus:ring-2 focus:ring-rose-gold focus:ring-offset-2 focus:ring-offset-charcoal rounded transition-colors duration-300"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-              onClick={(e) => {
-                if (window.location.pathname === '/') {
-                  e.preventDefault()
-                  window.scrollTo({ top: 0, behavior: 'smooth' })
-                }
-              }}
-              aria-label="NOVAIRA - Home"
-            >
+        <nav
+          className="max-w-6xl mx-auto px-5 sm:px-8 h-[4.5rem] flex items-center justify-between gap-4"
+          aria-label="Main navigation"
+        >
+          <a
+            href="/"
+            className="flex items-center gap-2.5 text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-ink rounded-sm"
+            onClick={(e) => {
+              if (typeof window !== 'undefined' && window.location.pathname === '/') {
+                e.preventDefault()
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+              }
+            }}
+            aria-label="NOVAIRA home"
+          >
+            <NovairaLogo heightClass="h-8 sm:h-9" priority className="shrink-0" />
+            <span className="font-display text-xl sm:text-2xl font-light tracking-tight text-silver-cream">
               NOVAIRA
-            </motion.a>
+            </span>
+          </a>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              {navItems.map((item, index) => (
-                <motion.a
-                  key={item.href}
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    handleNavClick(item.href)
-                  }}
-                  className="text-sand/85 hover:text-rose-gold transition-colors duration-300 text-sm font-light focus:outline-none focus:ring-2 focus:ring-rose-gold focus:ring-offset-2 focus:ring-offset-charcoal rounded px-2 py-1"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * index, duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-                  whileHover={{ y: -2 }}
-                >
-                  {item.label}
-                </motion.a>
-              ))}
-            </div>
-
-            {/* Desktop CTA Button */}
-            <motion.a
-              href="#contact"
-              className="hidden md:block px-6 py-2.5 border border-rose-gold/50 text-rose-gold hover:bg-rose-gold hover:text-charcoal transition-all duration-300 text-sm font-light focus:outline-none focus:ring-2 focus:ring-rose-gold focus:ring-offset-2 focus:ring-offset-charcoal rounded no-underline"
-              whileHover={{ scale: 1.02, y: -1 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+          <div className="hidden md:flex items-center gap-10">
+            {NAV_ITEMS.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={(e) => {
+                  e.preventDefault()
+                  scrollToHash(item.href)
+                }}
+                className="text-sm font-sans font-extralight text-cream/85 hover:text-gold-light transition-colors duration-200"
+              >
+                {item.label}
+              </a>
+            ))}
+            <a
+              href="#pilot-program"
               onClick={(e) => {
                 e.preventDefault()
-                handleNavClick('#contact')
+                scrollToHash('#pilot-program')
               }}
-              aria-label="Request consultation"
+              className="text-sm font-sans font-light px-5 py-2.5 rounded-sm bg-gold text-ink hover:bg-gold-light transition-colors duration-200"
             >
-              Request Consultation
-            </motion.a>
-
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden text-rose-gold p-2 focus:outline-none focus:ring-2 focus:ring-rose-gold focus:ring-offset-2 focus:ring-offset-charcoal rounded"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
-              aria-expanded={mobileMenuOpen}
-            >
-              {mobileMenuOpen ? (
-                <X className="w-6 h-6" aria-hidden="true" />
-              ) : (
-                <Menu className="w-6 h-6" aria-hidden="true" />
-              )}
-            </button>
+              Apply for Pilot Partnership
+            </a>
           </div>
-        </div>
-      </motion.nav>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-charcoal/95 backdrop-blur-md z-40 pt-20"
-              onClick={() => setMobileMenuOpen(false)}
-              aria-hidden="true"
-            />
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'tween', duration: 0.3, ease: 'easeInOut' }}
-              className="fixed top-20 right-0 bottom-0 w-80 bg-charcoal/98 backdrop-blur-md border-l border-rose-gold/20 z-50 overflow-y-auto"
-              role="dialog"
-              aria-modal="true"
-              aria-label="Mobile navigation menu"
+          <button
+            type="button"
+            className="md:hidden p-2 text-gold rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+            aria-expanded={mobileOpen}
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            onClick={() => setMobileOpen((o) => !o)}
+          >
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
+              {mobileOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+        </nav>
+      </header>
+
+      <div
+        className={`fixed inset-0 z-40 md:hidden transition-opacity duration-200 ${
+          mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+        aria-hidden={!mobileOpen}
+      >
+        <button
+          type="button"
+          className="absolute inset-0 bg-ink/90"
+          aria-label="Close menu"
+          onClick={() => setMobileOpen(false)}
+        />
+        <div
+          className={`absolute top-[4.5rem] right-0 bottom-0 w-[min(100%,20rem)] bg-ink-muted border-l border-gold/15 p-8 flex flex-col gap-6 transition-transform duration-200 ease-out ${
+            mobileOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
+          {NAV_ITEMS.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="font-display text-xl text-silver-cream"
+              onClick={(e) => {
+                e.preventDefault()
+                setMobileOpen(false)
+                scrollToHash(item.href)
+              }}
             >
-              <nav className="flex flex-col p-8 space-y-6" aria-label="Mobile navigation">
-                {navItems.map((item, index) => (
-                  <motion.a
-                    key={item.href}
-                    href={item.href}
-                    onClick={(e) => {
-                      e.preventDefault()
-                      handleNavClick(item.href)
-                    }}
-                    className="text-xl font-serif text-sand/90 hover:text-rose-gold transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-rose-gold focus:ring-offset-2 focus:ring-offset-charcoal rounded px-4 py-2"
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 20 }}
-                    transition={{ delay: index * 0.1, duration: 0.3 }}
-                  >
-                    {item.label}
-                  </motion.a>
-                ))}
-                <motion.a
-                  href="#contact"
-                  className="mt-8 inline-block px-8 py-3 bg-rose-gold text-charcoal hover:bg-rose-blush transition-all duration-300 text-sm font-light focus:outline-none focus:ring-2 focus:ring-rose-gold focus:ring-offset-2 focus:ring-offset-charcoal rounded no-underline"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  transition={{ delay: navItems.length * 0.1, duration: 0.3 }}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    setMobileMenuOpen(false)
-                    handleNavClick('#contact')
-                  }}
-                >
-                  Request Consultation
-                </motion.a>
-              </nav>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-
+              {item.label}
+            </a>
+          ))}
+          <a
+            href="#pilot-program"
+            className="mt-4 text-center text-sm font-light px-5 py-3 rounded-sm bg-gold text-ink"
+            onClick={(e) => {
+              e.preventDefault()
+              setMobileOpen(false)
+              scrollToHash('#pilot-program')
+            }}
+          >
+            Apply for Pilot Partnership
+          </a>
+        </div>
+      </div>
     </>
   )
 }
-

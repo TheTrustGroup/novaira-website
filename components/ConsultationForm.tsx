@@ -1,61 +1,42 @@
 'use client'
 
+/**
+ * Job: Send consultation lead — four fields, fetch POST, no navigation.
+ */
 import { useState, FormEvent, ChangeEvent } from 'react'
-import { motion } from 'framer-motion'
-import { Mail, Building2, MessageSquare } from 'lucide-react'
 
-const INSTITUTION_OPTIONS = [
-  { value: 'hotel', label: 'Hotel / Hospitality' },
-  { value: 'hospital', label: 'Hospital / Healthcare' },
-  { value: 'school', label: 'School / Education' },
-  { value: 'office', label: 'Corporate Office' },
-  { value: 'home', label: 'Private Residence' },
+const SPACE_OPTIONS = [
+  { value: 'hotel', label: 'Hotel / hospitality' },
+  { value: 'hospital', label: 'Hospital / healthcare' },
+  { value: 'school', label: 'School / education' },
+  { value: 'office', label: 'Corporate office' },
+  { value: 'home', label: 'Private residence' },
   { value: 'other', label: 'Other' },
 ] as const
 
-const FACILITIES_OPTIONS = [
-  { value: '1-5', label: '1–5' },
-  { value: '6-20', label: '6–20' },
-  { value: '21-50', label: '21–50' },
-  { value: '50+', label: '50+' },
-] as const
-
-const TIMELINE_OPTIONS = [
-  { value: 'within_1_month', label: 'Within 1 month' },
-  { value: '1_3_months', label: '1–3 months' },
-  { value: '3_6_months', label: '3–6 months' },
-  { value: 'exploring', label: 'Exploring options' },
-] as const
-
-const inputBase =
-  'w-full px-4 py-3 bg-charcoal border border-rose-gold/20 text-sand focus:border-rose-gold focus:outline-none focus:ring-2 focus:ring-rose-gold/50 transition-all duration-300 rounded font-light'
-const labelClass = 'block text-sm font-light text-sand/80 mb-2'
-const requiredStar = <span className="text-rose-gold">*</span>
+const inputClass =
+  'w-full px-4 py-3 bg-ink border border-gold/25 text-cream placeholder:text-cream/35 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/40 transition-colors duration-200 rounded-sm font-sans font-extralight text-sm sm:text-base'
+const labelClass = 'block text-xs tracking-[0.12em] uppercase text-gold/85 mb-2 font-sans font-light'
 
 export default function ConsultationForm() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     organization: '',
-    institutionType: '',
-    facilities: '',
-    timeline: '',
-    message: '',
-    website: '', // honeypot
+    spaceType: '' as '' | (typeof SPACE_OPTIONS)[number]['value'],
+    website: '',
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [submittedName, setSubmittedName] = useState('')
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (formData.website) return // honeypot
+    if (formData.website) return
     setIsSubmitting(true)
     setSubmitStatus('idle')
 
@@ -67,11 +48,8 @@ export default function ConsultationForm() {
           name: formData.name.trim(),
           email: formData.email.trim(),
           organization: formData.organization.trim(),
-          institution_type: formData.institutionType || undefined,
-          facilities: formData.facilities || undefined,
-          timeline: formData.timeline || undefined,
-          message: formData.message.trim() || undefined,
-          website: formData.website || undefined, // honeypot
+          organization_type: formData.spaceType,
+          website: formData.website || undefined,
         }),
       })
 
@@ -85,10 +63,7 @@ export default function ConsultationForm() {
         name: '',
         email: '',
         organization: '',
-        institutionType: '',
-        facilities: '',
-        timeline: '',
-        message: '',
+        spaceType: '',
         website: '',
       })
     } catch {
@@ -100,27 +75,17 @@ export default function ConsultationForm() {
 
   if (submitStatus === 'success') {
     return (
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-center py-12 px-4"
-      >
-        <div className="w-16 h-16 bg-rose-gold/20 rounded-full flex items-center justify-center mx-auto mb-6">
-          <Mail className="w-8 h-8 text-rose-gold" aria-hidden="true" />
-        </div>
-        <p className="text-lg sm:text-xl text-ivory font-light leading-relaxed max-w-md mx-auto">
-          Thank you, {submittedName}. We&apos;ll be in touch within 2 business days.
-          <br />
-          <span className="text-sand/80 mt-2 block">— The NOVAIRA Team</span>
+      <div className="text-center py-10 px-4 animate-[fadeIn_0.45s_ease-out_forwards]">
+        <p className="font-display text-xl sm:text-2xl text-silver-cream font-light leading-relaxed max-w-md mx-auto">
+          Thank you, {submittedName}. We will respond within two business days.
         </p>
-      </motion.div>
+      </div>
     )
   }
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-xl mx-auto text-left space-y-5">
-      {/* Honeypot - hidden from users */}
-      <div className="absolute -left-[9999px] top-0" aria-hidden="true">
+    <form onSubmit={handleSubmit} className="space-y-6 text-left relative">
+      <div className="absolute -left-[9999px] top-0 w-px h-px overflow-hidden" aria-hidden>
         <label htmlFor="website">Website</label>
         <input
           type="text"
@@ -135,143 +100,78 @@ export default function ConsultationForm() {
 
       <div>
         <label htmlFor="consultation-name" className={labelClass}>
-          Full Name {requiredStar}
+          Name
         </label>
         <input
           type="text"
           id="consultation-name"
           name="name"
           required
+          autoComplete="name"
           value={formData.name}
           onChange={handleChange}
-          className={inputBase}
-          placeholder="Your full name"
-          aria-required="true"
+          className={inputClass}
+          placeholder="Full name"
         />
       </div>
 
       <div>
         <label htmlFor="consultation-email" className={labelClass}>
-          Work Email {requiredStar}
+          Email
         </label>
-        <div className="relative">
-          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-sand/40 pointer-events-none" />
-          <input
-            type="email"
-            id="consultation-email"
-            name="email"
-            required
-            value={formData.email}
-            onChange={handleChange}
-            className={`${inputBase} pl-12`}
-            placeholder="you@company.com"
-            aria-required="true"
-          />
-        </div>
-      </div>
-
-      <div>
-        <label htmlFor="consultation-organization" className={labelClass}>
-          Organization Name {requiredStar}
-        </label>
-        <div className="relative">
-          <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-sand/40 pointer-events-none" />
-          <input
-            type="text"
-            id="consultation-organization"
-            name="organization"
-            required
-            value={formData.organization}
-            onChange={handleChange}
-            className={`${inputBase} pl-12`}
-            placeholder="Your organization"
-            aria-required="true"
-          />
-        </div>
-      </div>
-
-      <div>
-        <label htmlFor="consultation-institution" className={labelClass}>
-          Type of Institution {requiredStar}
-        </label>
-        <select
-          id="consultation-institution"
-          name="institutionType"
+        <input
+          type="email"
+          id="consultation-email"
+          name="email"
           required
-          value={formData.institutionType}
+          autoComplete="email"
+          value={formData.email}
           onChange={handleChange}
-          className={`${inputBase} appearance-none cursor-pointer bg-charcoal pr-10`}
-          aria-required="true"
-        >
-          <option value="">Select type...</option>
-          {INSTITUTION_OPTIONS.map((opt) => (
-            <option key={opt.value} value={opt.value}>
-              {opt.label}
-            </option>
-          ))}
-        </select>
+          className={inputClass}
+          placeholder="you@organisation.com"
+        />
       </div>
 
       <div>
-        <label htmlFor="consultation-facilities" className={labelClass}>
-          Number of bathrooms / facilities
+        <label htmlFor="consultation-org" className={labelClass}>
+          Organisation
+        </label>
+        <input
+          type="text"
+          id="consultation-org"
+          name="organization"
+          required
+          autoComplete="organization"
+          value={formData.organization}
+          onChange={handleChange}
+          className={inputClass}
+          placeholder="Organisation name"
+        />
+      </div>
+
+      <div>
+        <label htmlFor="consultation-space" className={labelClass}>
+          Type of Space
         </label>
         <select
-          id="consultation-facilities"
-          name="facilities"
-          value={formData.facilities}
+          id="consultation-space"
+          name="spaceType"
+          required
+          value={formData.spaceType}
           onChange={handleChange}
-          className={`${inputBase} appearance-none cursor-pointer bg-charcoal pr-10`}
+          className={`${inputClass} cursor-pointer appearance-none bg-ink pr-10`}
         >
-          <option value="">Select range...</option>
-          {FACILITIES_OPTIONS.map((opt) => (
+          <option value="">Select…</option>
+          {SPACE_OPTIONS.map((opt) => (
             <option key={opt.value} value={opt.value}>
               {opt.label}
             </option>
           ))}
         </select>
-      </div>
-
-      <div>
-        <label htmlFor="consultation-timeline" className={labelClass}>
-          Timeline
-        </label>
-        <select
-          id="consultation-timeline"
-          name="timeline"
-          value={formData.timeline}
-          onChange={handleChange}
-          className={`${inputBase} appearance-none cursor-pointer bg-charcoal pr-10`}
-        >
-          <option value="">Select timeline...</option>
-          {TIMELINE_OPTIONS.map((opt) => (
-            <option key={opt.value} value={opt.value}>
-              {opt.label}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div>
-        <label htmlFor="consultation-message" className={labelClass}>
-          Message / Any questions
-        </label>
-        <div className="relative">
-          <MessageSquare className="absolute left-4 top-4 w-5 h-5 text-sand/40 pointer-events-none" />
-          <textarea
-            id="consultation-message"
-            name="message"
-            rows={4}
-            value={formData.message}
-            onChange={handleChange}
-            className={`${inputBase} pl-12 resize-none`}
-            placeholder="Tell us about your needs or questions..."
-          />
-        </div>
       </div>
 
       {submitStatus === 'error' && (
-        <p className="text-sm text-rose-gold" role="alert">
+        <p className="text-sm text-gold-light" role="alert">
           Something went wrong. Please try again.
         </p>
       )}
@@ -279,9 +179,9 @@ export default function ConsultationForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full sm:w-auto px-8 py-3 bg-rose-gold text-charcoal hover:bg-rose-blush transition-all duration-300 font-light rounded focus:outline-none focus:ring-2 focus:ring-rose-gold focus:ring-offset-2 focus:ring-offset-charcoal disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full sm:w-auto font-sans font-light text-sm px-10 py-3.5 rounded-sm bg-gold text-ink hover:bg-gold-light transition-colors duration-200 disabled:opacity-45 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-ink-muted"
       >
-        {isSubmitting ? 'Sending...' : 'Request Consultation'}
+        {isSubmitting ? 'Sending…' : 'Request Consultation'}
       </button>
     </form>
   )

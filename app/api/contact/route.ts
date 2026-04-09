@@ -4,12 +4,14 @@ import { supabaseAdmin } from '@/lib/supabase-admin'
 import { upsertLead } from '@/lib/leads'
 import { sendConsultationNotification } from '@/lib/email'
 
+const spaceEnum = z.enum(['hotel', 'hospital', 'school', 'office', 'home', 'other'])
+
 const bodySchema = z.object({
   email: z.string().email('Invalid email address'),
   name: z.string().min(1, 'Name is required'),
   organization: z.string().min(1, 'Organization is required'),
-  organization_type: z.enum(['hotel', 'hospital', 'school', 'office', 'home', 'other']).optional(),
-  institution_type: z.enum(['hotel', 'hospital', 'school', 'office', 'home', 'other']).optional(),
+  organization_type: spaceEnum.optional(),
+  institution_type: spaceEnum.optional(),
   facilities: z.string().optional(),
   timeline: z.string().optional(),
   message: z.string().optional(),
@@ -37,6 +39,9 @@ export async function POST(request: NextRequest) {
     } = parsed.data
 
     const orgType = organization_type ?? institution_type
+    if (!orgType) {
+      return NextResponse.json({ error: 'Type of space is required' }, { status: 400 })
+    }
     const notesParts: string[] = []
     if (facilities) notesParts.push(`Facilities: ${facilities}`)
     if (timeline) notesParts.push(`Timeline: ${timeline}`)

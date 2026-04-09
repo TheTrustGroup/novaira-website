@@ -1,11 +1,13 @@
+import Link from 'next/link'
+
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-charcoal text-sand">
-      <div className="text-center">
-        <h1 className="text-4xl font-serif text-ivory mb-4">404</h1>
-        <p className="text-lg text-sand/70 font-light">Page not found</p>
-      </div>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-ink text-cream px-6">
+      <h1 className="text-4xl font-display text-silver-cream mb-3 font-light">404</h1>
+      <p className="text-lg text-cream/70 font-extralight mb-8">Page not found</p>
+      <Link href="/" className="text-gold hover:text-gold-light transition-colors text-sm font-light">
+        Back to home
+      </Link>
     </div>
   )
 }
-

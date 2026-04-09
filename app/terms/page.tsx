@@ -16,20 +16,20 @@ export default function TermsPage() {
       <a href="#main-content" className="skip-link">
         Skip to main content
       </a>
-      <main id="main-content" className="min-h-screen">
+      <main id="main-content" className="min-h-screen bg-ink text-cream">
         <Navigation />
-        <article className="pt-28 pb-20 px-6 sm:px-8 lg:px-12 bg-charcoal">
+        <article className="pt-28 pb-20 px-6 sm:px-8 lg:px-12">
           <div className="max-w-3xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl font-serif text-ivory mb-4 font-medium">
+            <h1 className="text-4xl sm:text-5xl font-display text-silver-cream mb-4 font-light">
               Terms of Service
             </h1>
-            <p className="text-sand/75 font-light text-sm mb-12">
+            <p className="text-cream/70 font-extralight text-sm mb-12">
               Last updated: February 2025
             </p>
 
-            <div className="prose prose-invert max-w-none space-y-8 text-sand/90 font-light leading-relaxed">
+            <div className="prose prose-invert max-w-none space-y-8 text-cream font-extralight leading-relaxed">
               <section>
-                <h2 className="text-2xl font-serif text-rose-gold mb-3 font-medium">
+                <h2 className="text-2xl font-display text-gold-light mb-3 font-light">
                   Use of the website
                 </h2>
                 <p>
@@ -38,7 +38,7 @@ export default function TermsPage() {
               </section>
 
               <section>
-                <h2 className="text-2xl font-serif text-rose-gold mb-3 font-medium">
+                <h2 className="text-2xl font-display text-gold-light mb-3 font-light">
                   Product availability
                 </h2>
                 <p>
@@ -47,22 +47,22 @@ export default function TermsPage() {
               </section>
 
               <section>
-                <h2 className="text-2xl font-serif text-rose-gold mb-3 font-medium">
+                <h2 className="text-2xl font-display text-gold-light mb-3 font-light">
                   Contact information
                 </h2>
                 <p>
                   For questions about these terms or our services, please contact us at:{' '}
                   <a
                     href={`mailto:${CONTACT_EMAIL}`}
-                    className="text-rose-gold hover:text-rose-blush transition-colors underline focus:outline-none focus:ring-2 focus:ring-rose-gold focus:ring-offset-2 focus:ring-offset-charcoal rounded"
+                    className="text-gold hover:text-gold-light transition-colors underline focus:outline-none focus:ring-2 focus:ring-gold-light focus:ring-offset-2 focus:ring-offset-ink rounded-sm"
                   >
                     {CONTACT_EMAIL}
                   </a>
                 </p>
               </section>
 
-              <p className="pt-4 text-sand/70 text-sm">
-                <Link href="/" className="text-rose-gold hover:text-rose-blush transition-colors">
+              <p className="pt-4 text-cream/60 text-sm">
+                <Link href="/" className="text-gold hover:text-gold-light transition-colors">
                   ← Back to home
                 </Link>
               </p>

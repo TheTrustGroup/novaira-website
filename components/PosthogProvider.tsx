@@ -8,7 +8,15 @@ export function PosthogProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
 
   useEffect(() => {
-    initPostHog()
+    const run = () => initPostHog()
+    const w = typeof window !== 'undefined' ? window : null
+    if (!w) return
+    if (typeof w.requestIdleCallback === 'function') {
+      const id = w.requestIdleCallback(run, { timeout: 3000 })
+      return () => w.cancelIdleCallback(id)
+    }
+    const t = w.setTimeout(run, 1)
+    return () => w.clearTimeout(t)
   }, [])
 
   useEffect(() => {

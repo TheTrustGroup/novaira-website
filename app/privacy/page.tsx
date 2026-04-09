@@ -17,26 +17,26 @@ export default function PrivacyPage() {
       <a href="#main-content" className="skip-link">
         Skip to main content
       </a>
-      <main id="main-content" className="min-h-screen">
+      <main id="main-content" className="min-h-screen bg-ink text-cream">
         <Navigation />
-        <article className="pt-28 pb-20 px-6 sm:px-8 lg:px-12 bg-charcoal">
+        <article className="pt-28 pb-20 px-6 sm:px-8 lg:px-12">
           <div className="max-w-3xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl font-serif text-ivory mb-4 font-medium">
+            <h1 className="text-4xl sm:text-5xl font-display text-silver-cream mb-4 font-light">
               Privacy Policy
             </h1>
-            <p className="text-sand/75 font-light text-sm mb-12">
+            <p className="text-cream/70 font-extralight text-sm mb-12">
               Last updated: February 2025
             </p>
 
-            <div className="prose prose-invert max-w-none space-y-8 text-sand/90 font-light leading-relaxed">
+            <div className="prose prose-invert max-w-none space-y-8 text-cream font-extralight leading-relaxed">
               <section>
-                <h2 className="text-2xl font-serif text-rose-gold mb-3 font-medium">
+                <h2 className="text-2xl font-display text-gold-light mb-3 font-light">
                   What data we collect
                 </h2>
                 <p>
                   When you use our website or request a consultation, we may collect:
                 </p>
-                <ul className="list-disc pl-6 space-y-2 text-sand/85">
+                <ul className="list-disc pl-6 space-y-2 text-cream/85">
                   <li>Email address</li>
                   <li>Name</li>
                   <li>Organization (if you provide it)</li>
@@ -45,7 +45,7 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="text-2xl font-serif text-rose-gold mb-3 font-medium">
+                <h2 className="text-2xl font-display text-gold-light mb-3 font-light">
                   How we use your data
                 </h2>
                 <p>
@@ -54,7 +54,7 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="text-2xl font-serif text-rose-gold mb-3 font-medium">
+                <h2 className="text-2xl font-display text-gold-light mb-3 font-light">
                   We do not sell your data
                 </h2>
                 <p>
@@ -63,14 +63,14 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="text-2xl font-serif text-rose-gold mb-3 font-medium">
+                <h2 className="text-2xl font-display text-gold-light mb-3 font-light">
                   Data requests and contact
                 </h2>
                 <p>
                   For requests about your data (access, correction, deletion, or other privacy concerns), please contact us at:{' '}
                   <a
                     href={`mailto:${CONTACT_EMAIL}`}
-                    className="text-rose-gold hover:text-rose-blush transition-colors underline focus:outline-none focus:ring-2 focus:ring-rose-gold focus:ring-offset-2 focus:ring-offset-charcoal rounded"
+                    className="text-gold hover:text-gold-light transition-colors underline focus:outline-none focus:ring-2 focus:ring-gold-light focus:ring-offset-2 focus:ring-offset-ink rounded-sm"
                   >
                     {CONTACT_EMAIL}
                   </a>
@@ -78,7 +78,7 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="text-2xl font-serif text-rose-gold mb-3 font-medium">
+                <h2 className="text-2xl font-display text-gold-light mb-3 font-light">
                   Governing law
                 </h2>
                 <p>
@@ -86,8 +86,8 @@ export default function PrivacyPage() {
                 </p>
               </section>
 
-              <p className="pt-4 text-sand/70 text-sm">
-                <Link href="/" className="text-rose-gold hover:text-rose-blush transition-colors">
+              <p className="pt-4 text-cream/60 text-sm">
+                <Link href="/" className="text-gold hover:text-gold-light transition-colors">
                   ← Back to home
                 </Link>
               </p>

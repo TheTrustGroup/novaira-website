@@ -1,16 +1,10 @@
 import Navigation from '@/components/Navigation'
 import Hero from '@/components/Hero'
-import EmotionalStory from '@/components/EmotionalStory'
-import ProductShowcase from '@/components/ProductShowcase'
+import CredentialsBar from '@/components/CredentialsBar'
 import HowItWorks from '@/components/HowItWorks'
-import WaitlistSection from '@/components/WaitlistSection'
-import EnvironmentSelector from '@/components/EnvironmentSelector'
-import TrustSafety from '@/components/TrustSafety'
 import PilotProgram from '@/components/PilotProgram'
-import FoundersNote from '@/components/FoundersNote'
-import BrandPhilosophy from '@/components/BrandPhilosophy'
-import CallToAction from '@/components/CallToAction'
-import PressSection from '@/components/PressSection'
+import FounderSection from '@/components/FounderSection'
+import ContactSection from '@/components/ContactSection'
 import Footer from '@/components/Footer'
 
 const productJsonLd = {
@@ -19,12 +13,12 @@ const productJsonLd = {
   name: 'NOVAIRA series 1',
   brand: { '@type': 'Brand', name: 'NOVAIRA' },
   description:
-    'Premium CE & ISO certified sanitary disposal system for luxury hotels, hospitals, schools and offices',
-  category: 'Sanitary Equipment',
+    'CE and ISO 9001 certified menstrual hygiene disposal unit. Silent operation. Medical-grade materials for hotels, hospitals, schools, and offices.',
+  category: 'Sanitary equipment',
   manufacturer: {
     '@type': 'Organization',
     name: 'NOVAIRA',
-    url: 'https://novairaworld.com',
+    url: 'https://www.novairaworld.com',
   },
 }
 
@@ -38,23 +32,16 @@ export default function Home() {
       <a href="#main-content" className="skip-link">
         Skip to main content
       </a>
-      <main id="main-content" className="min-h-screen">
+      <main id="main-content" className="min-h-screen bg-ink text-cream">
         <Navigation />
         <Hero />
-        <EmotionalStory />
-        <ProductShowcase />
+        <CredentialsBar />
         <HowItWorks />
-        <WaitlistSection />
-        <EnvironmentSelector />
-        <TrustSafety />
         <PilotProgram />
-        <FoundersNote />
-        <BrandPhilosophy />
-        <CallToAction />
-        <PressSection />
+        <FounderSection />
+        <ContactSection />
         <Footer />
       </main>
     </>
   )
 }
-
