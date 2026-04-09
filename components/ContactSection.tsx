@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * Job: Capture consultation requests — minimal fields, no reload on submit.
+ * Job: Short invitation, then the form.
  */
 import { useRevealOnScroll } from '@/hooks/useRevealOnScroll'
 import ConsultationForm from '@/components/ConsultationForm'
@@ -13,16 +13,19 @@ export default function ContactSection() {
     <section
       ref={ref}
       id="contact"
-      className="reveal-on-scroll py-20 sm:py-28 lg:py-32 px-5 sm:px-8 border-t border-gold/15 bg-ink-muted/30"
+      className="reveal-on-scroll py-24 sm:py-32 lg:py-40 px-6 sm:px-10 border-t border-gold/10 bg-ink-muted/25"
       aria-labelledby="contact-heading"
     >
-      <div className="max-w-xl mx-auto">
+      <div className="max-w-md mx-auto">
         <h2
           id="contact-heading"
-          className="font-display text-3xl sm:text-4xl text-silver-cream font-light text-center mb-10 sm:mb-12"
+          className="font-display text-[1.75rem] sm:text-3xl text-silver-cream font-light text-center mb-4 tracking-[-0.02em]"
         >
-          Request consultation
+          Consultation
         </h2>
+        <p className="font-sans text-sm text-cream/65 text-center mb-12 leading-relaxed">
+          Leave your details. We reply within two business days.
+        </p>
         <ConsultationForm />
       </div>
     </section>

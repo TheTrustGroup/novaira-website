@@ -1,10 +1,9 @@
 'use client'
 
 /**
- * Job: Headline + deployment context + pilot CTA. Certifications live in CredentialsBar only.
+ * Job: One clear promise, one line of context, one action. Certs sit in the bar below.
  */
 import { useState } from 'react'
-import { NovairaLogo } from '@/components/NovairaLogo'
 import { scrollToSectionId } from '@/lib/scrollToSection'
 
 export default function Hero() {
@@ -19,7 +18,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative min-h-[100svh] flex flex-col items-center justify-center px-5 sm:px-8 pt-[4.5rem] pb-16"
+      className="relative min-h-[100svh] flex flex-col items-center justify-center px-6 sm:px-12 pt-[5.75rem] pb-24 sm:pb-28"
       aria-label="Introduction"
     >
       <div className="absolute inset-0 z-0 bg-ink">
@@ -40,38 +39,30 @@ export default function Hero() {
             >
               <source src="/novaira-hero-video.mp4" type="video/mp4" />
             </video>
-            {!videoReady && (
-              <div className="absolute inset-0 flex items-center justify-center" aria-hidden>
-                <NovairaLogo heightClass="h-16 sm:h-20" className="opacity-30" />
-              </div>
-            )}
+            {!videoReady && <div className="absolute inset-0 bg-ink" aria-hidden />}
           </>
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center" aria-hidden>
-            <NovairaLogo heightClass="h-24 sm:h-28" className="opacity-35" />
-          </div>
+          <div className="absolute inset-0 bg-ink" aria-hidden />
         )}
         <div
-          className="absolute inset-0 bg-gradient-to-b from-ink/92 via-ink/82 to-ink/94 pointer-events-none"
+          className="absolute inset-0 bg-gradient-to-b from-ink/90 via-ink/78 to-ink/92 pointer-events-none"
           aria-hidden
         />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto text-center px-1">
-        <h1 className="font-display font-light text-display-sm sm:text-display-md md:text-display-lg lg:text-display-xl text-silver-cream text-balance mb-6 sm:mb-8 text-legible-on-media">
-          Menstrual hygiene disposal.
-          <br />
-          Designed for the spaces that demand excellence.
+      <div className="relative z-10 w-full max-w-[34rem] sm:max-w-2xl lg:max-w-3xl mx-auto text-center px-2">
+        <h1 className="font-display font-light text-[1.875rem] leading-[1.18] sm:text-4xl sm:leading-[1.15] md:text-5xl md:leading-[1.12] lg:text-[3.25rem] lg:leading-[1.1] text-silver-cream text-balance mb-8 sm:mb-10 md:mb-12 text-legible-on-media">
+          Menstrual hygiene disposal for spaces that refuse to compromise.
         </h1>
-        <p className="font-sans font-light text-base sm:text-lg text-cream max-w-2xl mx-auto mb-10 sm:mb-12 leading-relaxed text-legible-on-media">
-          Founding institutional partnerships · Q3 2026 deployment.
+        <p className="font-sans font-normal text-[0.9375rem] sm:text-base text-cream/88 max-w-md mx-auto mb-12 sm:mb-14 leading-[1.75] text-legible-on-media">
+          Founding partnerships open for deployment in Q3 2026.
         </p>
         <button
           type="button"
           onClick={scrollToPilot}
-          className="font-sans font-light text-sm tracking-wide px-8 py-3.5 sm:px-10 sm:py-4 rounded-sm bg-gold text-ink hover:bg-gold-light transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+          className="font-sans font-normal text-[0.8125rem] sm:text-sm tracking-[0.04em] uppercase px-9 py-3.5 sm:px-10 sm:py-4 rounded-sm bg-gold text-ink hover:bg-gold-light transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
         >
-          Apply for Pilot Partnership
+          Apply for pilot
         </button>
       </div>
     </section>

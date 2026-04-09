@@ -1,3 +1,7 @@
+/**
+ * Brand colors match production (novairaworld.com): charcoal base, warm paper type,
+ * dusty-rose accent. Tailwind keys stay `gold` / `gold-light` for stable class names.
+ */
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -9,18 +13,18 @@ module.exports = {
     extend: {
       colors: {
         ink: {
-          DEFAULT: '#080509',
-          muted: '#121014',
+          DEFAULT: '#1a1a1a',
+          muted: '#242424',
         },
         cream: {
-          DEFAULT: '#F4ECD9',
-          muted: 'rgba(244, 236, 217, 0.82)',
+          DEFAULT: '#f5f1ed',
+          muted: 'rgba(245, 241, 237, 0.82)',
         },
         gold: {
-          DEFAULT: '#C4956A',
-          light: '#E8C99A',
+          DEFAULT: '#d4a5a5',
+          light: '#e8c7c7',
         },
-        'silver-cream': '#F5F0EC',
+        'silver-cream': '#faf9f7',
       },
       fontFamily: {
         display: ['var(--font-cormorant)', 'Georgia', 'serif'],

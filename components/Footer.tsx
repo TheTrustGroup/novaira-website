@@ -1,40 +1,33 @@
 /**
- * Job: Identity, email, year — nothing else required on the landing page.
+ * Job: Contact and legal only. No second nav column.
  */
-import { NovairaLogo } from '@/components/NovairaLogo'
 import Link from 'next/link'
 
 export default function Footer() {
   return (
-    <footer className="border-t border-gold/15 py-12 sm:py-14 px-5 sm:px-8">
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-8">
-        <div className="flex items-center gap-3 isolate">
-          <NovairaLogo heightClass="h-7 sm:h-8" className="shrink-0" />
-          <span className="font-display text-xl text-silver-cream font-light tracking-tight text-legible-on-ink">
-            NOVAIRA
-          </span>
+    <footer className="border-t border-gold/10 py-16 sm:py-20 px-6 sm:px-10">
+      <div className="max-w-5xl mx-auto flex flex-col gap-10 sm:flex-row sm:items-end sm:justify-between">
+        <div className="font-display text-base sm:text-lg text-silver-cream/90 font-light tracking-[0.02em]">
+          NOVAIRA
         </div>
-        <a
-          href="mailto:office@novairaworld.com"
-          className="font-sans font-extralight text-cream/90 hover:text-gold-light transition-colors duration-200"
-        >
-          office@novairaworld.com
-        </a>
-        <p className="font-sans font-extralight text-sm text-cream/60">
-          © 2026 NOVAIRA
-          <span className="mx-2 opacity-40" aria-hidden>
-            ·
-          </span>
-          <Link href="/privacy" className="hover:text-gold-light transition-colors">
-            Privacy
-          </Link>
-          <span className="mx-1.5 opacity-40" aria-hidden>
-            ·
-          </span>
-          <Link href="/terms" className="hover:text-gold-light transition-colors">
-            Terms
-          </Link>
-        </p>
+        <div className="flex flex-col sm:items-end gap-4 text-sm font-sans font-normal text-cream/65">
+          <a
+            href="mailto:office@novairaworld.com"
+            className="text-cream/85 hover:text-gold-light transition-colors w-fit"
+          >
+            office@novairaworld.com
+          </a>
+          <p>
+            <span className="text-cream/50">© 2026 NOVAIRA.</span>{' '}
+            <Link href="/privacy" className="hover:text-gold-light transition-colors">
+              Privacy
+            </Link>
+            {', '}
+            <Link href="/terms" className="hover:text-gold-light transition-colors">
+              Terms
+            </Link>
+          </p>
+        </div>
       </div>
     </footer>
   )

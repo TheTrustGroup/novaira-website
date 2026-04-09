@@ -15,8 +15,8 @@ const SPACE_OPTIONS = [
 ] as const
 
 const inputClass =
-  'w-full px-4 py-3 bg-ink border border-gold/25 text-cream placeholder:text-cream/35 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/40 transition-colors duration-200 rounded-sm font-sans font-extralight text-sm sm:text-base'
-const labelClass = 'block text-xs tracking-[0.12em] uppercase text-gold/85 mb-2 font-sans font-light'
+  'w-full px-4 py-3 bg-ink border border-gold/25 text-cream placeholder:text-cream/35 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/40 transition-colors duration-200 rounded-sm font-sans font-normal text-sm sm:text-base'
+const labelClass = 'block text-sm text-cream/70 mb-2 font-sans font-normal'
 
 export default function ConsultationForm() {
   const [formData, setFormData] = useState({
@@ -151,7 +151,7 @@ export default function ConsultationForm() {
 
       <div>
         <label htmlFor="consultation-space" className={labelClass}>
-          Type of Space
+          Type of space
         </label>
         <select
           id="consultation-space"
@@ -179,9 +179,9 @@ export default function ConsultationForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full sm:w-auto font-sans font-light text-sm px-10 py-3.5 rounded-sm bg-gold text-ink hover:bg-gold-light transition-colors duration-200 disabled:opacity-45 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-ink-muted"
+        className="w-full sm:w-auto font-sans font-normal text-sm px-10 py-3.5 rounded-sm bg-gold text-ink hover:bg-gold-light transition-colors duration-200 disabled:opacity-45 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-ink-muted"
       >
-        {isSubmitting ? 'Sending…' : 'Request Consultation'}
+        {isSubmitting ? 'Sending…' : 'Send request'}
       </button>
     </form>
   )

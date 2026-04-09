@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * Job: Human proof without a manifesto — photo, name, one sentence.
+ * Job: Face, name, one line. No em dash stack.
  */
 import { useState } from 'react'
 import { useRevealOnScroll } from '@/hooks/useRevealOnScroll'
@@ -15,40 +15,38 @@ export default function FounderSection() {
   return (
     <section
       ref={ref}
-      className="reveal-on-scroll py-20 sm:py-28 px-5 sm:px-8"
+      className="reveal-on-scroll py-24 sm:py-32 px-6 sm:px-10"
       aria-labelledby="founder-heading"
     >
-      <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center gap-10 sm:gap-14">
-        <div className="shrink-0">
+      <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-12 sm:gap-16">
+        <div className="shrink-0 mx-auto sm:mx-0">
           {imgError ? (
             <div
-              className="w-40 h-40 sm:w-44 sm:h-44 rounded-full border border-gold/25 bg-ink-muted flex items-center justify-center font-display text-3xl text-gold/60"
+              className="w-36 h-36 sm:w-40 sm:h-40 rounded-full border border-gold/20 bg-ink-muted flex items-center justify-center font-display text-2xl text-gold/50"
               aria-hidden
             >
               JT
             </div>
           ) : (
-            // eslint-disable-next-line @next/next/no-img-element -- optional local asset; 404 falls back to initials
             <img
               src={FOUNDER_IMAGE}
-              alt="Josephine Turkson, Founder of NOVAIRA"
-              width={176}
-              height={176}
-              className="w-40 h-40 sm:w-44 sm:h-44 rounded-full object-cover border border-gold/25"
+              alt="Josephine Turkson, founder of NOVAIRA"
+              width={160}
+              height={160}
+              className="w-36 h-36 sm:w-40 sm:h-40 rounded-full object-cover border border-gold/20"
               loading="lazy"
               decoding="async"
               onError={() => setImgError(true)}
             />
           )}
         </div>
-        <div>
+        <div className="text-center sm:text-left">
           <h2 id="founder-heading" className="sr-only">
             Founder
           </h2>
-          <p className="font-display text-xl sm:text-2xl text-silver-cream font-light leading-snug">
-            <span className="text-gold-light">Josephine Turkson, Founder</span>
-            <span className="text-cream/80"> — </span>
-            NOVAIRA was built on a single belief: dignity deserves design.
+          <p className="font-sans text-sm text-gold-light/90 mb-3">Josephine Turkson, founder</p>
+          <p className="font-display text-lg sm:text-xl text-silver-cream/95 font-light leading-[1.55] tracking-[-0.02em]">
+            NOVAIRA rests on one premise: dignity deserves design.
           </p>
         </div>
       </div>

@@ -1,18 +1,16 @@
 /**
- * Job: Make CE / ISO / medical / silent impossible to miss — one factual strip, not badges.
+ * Job: One calm line of proof. No badge wall, no decorative separators.
  */
-const ITEMS = ['CE Certified', 'ISO 9001:2015', 'Medical Grade', 'Silent Operation'] as const
-
 export default function CredentialsBar() {
   return (
     <div
-      className="w-full border-y border-gold/20 bg-ink-muted/80"
+      className="w-full border-y border-gold/10 bg-ink-muted/60"
       role="region"
       aria-label="Certifications and product facts"
     >
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 py-4 sm:py-5">
-        <p className="font-sans font-light text-xs sm:text-sm text-cream text-center tracking-[0.12em] uppercase text-legible-on-ink">
-          {ITEMS.join('  ·  ')}
+      <div className="max-w-5xl mx-auto px-6 sm:px-10 py-6 sm:py-8">
+        <p className="font-sans font-normal text-sm sm:text-[0.9375rem] text-cream/80 text-center leading-relaxed text-legible-on-ink max-w-3xl mx-auto">
+          CE certified. ISO 9001:2015. Medical-grade materials. Silent operation.
         </p>
       </div>
     </div>
