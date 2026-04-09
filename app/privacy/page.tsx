@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import SkipLink from '@/components/SkipLink'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 
@@ -14,23 +15,21 @@ const JURISDICTION = '[Ghana / UK / US]' // Replace with your chosen jurisdictio
 export default function PrivacyPage() {
   return (
     <>
-      <a href="#main-content" className="skip-link">
-        Skip to main content
-      </a>
+      <SkipLink />
       <main id="main-content" className="min-h-screen bg-ink text-cream">
         <Navigation />
         <article className="pt-28 pb-20 px-6 sm:px-8 lg:px-12">
           <div className="max-w-3xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl font-display text-silver-cream mb-4 font-light">
+            <h1 className="text-4xl sm:text-5xl font-display text-silver-cream mb-4 font-light text-legible-on-ink">
               Privacy Policy
             </h1>
-            <p className="text-cream/70 font-extralight text-sm mb-12">
+            <p className="text-cream/80 font-light text-sm mb-12">
               Last updated: February 2025
             </p>
 
-            <div className="prose prose-invert max-w-none space-y-8 text-cream font-extralight leading-relaxed">
+            <div className="prose prose-invert max-w-none space-y-8 text-cream font-light leading-relaxed">
               <section>
-                <h2 className="text-2xl font-display text-gold-light mb-3 font-light">
+                <h2 className="text-2xl font-display text-gold-light mb-3 font-light text-legible-on-ink">
                   What data we collect
                 </h2>
                 <p>
@@ -45,7 +44,7 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="text-2xl font-display text-gold-light mb-3 font-light">
+                <h2 className="text-2xl font-display text-gold-light mb-3 font-light text-legible-on-ink">
                   How we use your data
                 </h2>
                 <p>
@@ -54,7 +53,7 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="text-2xl font-display text-gold-light mb-3 font-light">
+                <h2 className="text-2xl font-display text-gold-light mb-3 font-light text-legible-on-ink">
                   We do not sell your data
                 </h2>
                 <p>
@@ -63,7 +62,7 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="text-2xl font-display text-gold-light mb-3 font-light">
+                <h2 className="text-2xl font-display text-gold-light mb-3 font-light text-legible-on-ink">
                   Data requests and contact
                 </h2>
                 <p>
@@ -78,7 +77,7 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="text-2xl font-display text-gold-light mb-3 font-light">
+                <h2 className="text-2xl font-display text-gold-light mb-3 font-light text-legible-on-ink">
                   Governing law
                 </h2>
                 <p>

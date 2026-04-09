@@ -1,3 +1,5 @@
+import SkipLink from '@/components/SkipLink'
+import HomeHashScroll from '@/components/HomeHashScroll'
 import Navigation from '@/components/Navigation'
 import Hero from '@/components/Hero'
 import CredentialsBar from '@/components/CredentialsBar'
@@ -29,10 +31,9 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
       />
-      <a href="#main-content" className="skip-link">
-        Skip to main content
-      </a>
+      <SkipLink />
       <main id="main-content" className="min-h-screen bg-ink text-cream">
+        <HomeHashScroll />
         <Navigation />
         <Hero />
         <CredentialsBar />

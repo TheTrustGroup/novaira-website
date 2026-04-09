@@ -5,13 +5,14 @@
  */
 import { useState } from 'react'
 import { NovairaLogo } from '@/components/NovairaLogo'
+import { scrollToSectionId } from '@/lib/scrollToSection'
 
 export default function Hero() {
   const [videoReady, setVideoReady] = useState(false)
   const [videoFailed, setVideoFailed] = useState(false)
 
   const scrollToPilot = () => {
-    document.querySelector('#pilot-program')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    scrollToSectionId('#pilot-program')
   }
 
   const showVideo = !videoFailed
@@ -51,18 +52,18 @@ export default function Hero() {
           </div>
         )}
         <div
-          className="absolute inset-0 bg-gradient-to-b from-ink/88 via-ink/78 to-ink/92 pointer-events-none"
+          className="absolute inset-0 bg-gradient-to-b from-ink/92 via-ink/82 to-ink/94 pointer-events-none"
           aria-hidden
         />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
-        <h1 className="font-display font-light text-display-sm sm:text-display-md md:text-display-lg lg:text-display-xl text-silver-cream text-balance mb-6 sm:mb-8">
+      <div className="relative z-10 max-w-4xl mx-auto text-center px-1">
+        <h1 className="font-display font-light text-display-sm sm:text-display-md md:text-display-lg lg:text-display-xl text-silver-cream text-balance mb-6 sm:mb-8 text-legible-on-media">
           Menstrual hygiene disposal.
           <br />
           Designed for the spaces that demand excellence.
         </h1>
-        <p className="font-sans font-extralight text-base sm:text-lg text-cream/90 max-w-2xl mx-auto mb-10 sm:mb-12 leading-relaxed">
+        <p className="font-sans font-light text-base sm:text-lg text-cream max-w-2xl mx-auto mb-10 sm:mb-12 leading-relaxed text-legible-on-media">
           CE &amp; ISO 9001 certified. Silent. Medical grade.
           <br />
           Deploying Q3 2026.

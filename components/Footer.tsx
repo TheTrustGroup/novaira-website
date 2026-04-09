@@ -8,9 +8,11 @@ export default function Footer() {
   return (
     <footer className="border-t border-gold/15 py-12 sm:py-14 px-5 sm:px-8">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-8">
-        <div className="flex items-center gap-3">
-          <NovairaLogo heightClass="h-7 sm:h-8" className="shrink-0 opacity-95" />
-          <span className="font-display text-xl text-silver-cream font-light tracking-tight">NOVAIRA</span>
+        <div className="flex items-center gap-3 isolate">
+          <NovairaLogo heightClass="h-7 sm:h-8" className="shrink-0" />
+          <span className="font-display text-xl text-silver-cream font-light tracking-tight text-legible-on-ink">
+            NOVAIRA
+          </span>
         </div>
         <a
           href="mailto:office@novairaworld.com"

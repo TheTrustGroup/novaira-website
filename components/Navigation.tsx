@@ -1,22 +1,23 @@
 'use client'
 
 /**
- * Job: Same-page anchors + primary pilot CTA — three links only.
+ * Job: Section nav works on / and from legal pages; mobile scroll after overflow reset;
+ * header pilot = ghost (solid gold CTA only in Hero).
  */
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type MouseEvent } from 'react'
+import { usePathname } from 'next/navigation'
 import { NovairaLogo } from '@/components/NovairaLogo'
+import { scrollToSectionId, scrollToSectionIdAfterLayout } from '@/lib/scrollToSection'
 
 const NAV_ITEMS = [
-  { label: 'How It Works', href: '#how-it-works' },
-  { label: 'Pilot', href: '#pilot-program' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'How It Works', hash: '#how-it-works' as const },
+  { label: 'Pilot', hash: '#pilot-program' as const },
+  { label: 'Contact', hash: '#contact' as const },
 ] as const
 
-function scrollToHash(href: string) {
-  document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-}
-
 export default function Navigation() {
+  const pathname = usePathname()
+  const isHome = pathname === '/'
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
@@ -33,6 +34,20 @@ export default function Navigation() {
     }
   }, [mobileOpen])
 
+  function goToHash(e: MouseEvent<HTMLAnchorElement>, hash: string, defer: boolean) {
+    e.preventDefault()
+    if (!isHome) {
+      window.location.assign(`/${hash}`)
+      return
+    }
+    if (defer) {
+      document.body.style.overflow = ''
+      scrollToSectionIdAfterLayout(hash)
+    } else {
+      scrollToSectionId(hash)
+    }
+  }
+
   return (
     <>
       <header
@@ -41,12 +56,12 @@ export default function Navigation() {
         }`}
       >
         <nav
-          className="max-w-6xl mx-auto px-5 sm:px-8 h-[4.5rem] flex items-center justify-between gap-4"
+          className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-12 h-[4.5rem] flex items-center justify-between gap-4"
           aria-label="Main navigation"
         >
           <a
             href="/"
-            className="flex items-center gap-2.5 text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-ink rounded-sm"
+            className="isolate flex items-center gap-3 sm:gap-3.5 min-w-0 text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-ink rounded-sm"
             onClick={(e) => {
               if (typeof window !== 'undefined' && window.location.pathname === '/') {
                 e.preventDefault()
@@ -55,33 +70,29 @@ export default function Navigation() {
             }}
             aria-label="NOVAIRA home"
           >
-            <NovairaLogo heightClass="h-8 sm:h-9" priority className="shrink-0" />
-            <span className="font-display text-xl sm:text-2xl font-light tracking-tight text-silver-cream">
+            <span className="relative flex shrink-0 items-center">
+              <NovairaLogo heightClass="h-8 sm:h-9" priority className="shrink-0" />
+            </span>
+            <span className="font-display text-xl sm:text-2xl font-light tracking-tight text-silver-cream text-legible-on-media">
               NOVAIRA
             </span>
           </a>
 
-          <div className="hidden md:flex items-center gap-10">
+          <div className="hidden md:flex items-center gap-8 lg:gap-10 pl-2">
             {NAV_ITEMS.map((item) => (
               <a
-                key={item.href}
-                href={item.href}
-                onClick={(e) => {
-                  e.preventDefault()
-                  scrollToHash(item.href)
-                }}
-                className="text-sm font-sans font-extralight text-cream/85 hover:text-gold-light transition-colors duration-200"
+                key={item.hash}
+                href={isHome ? item.hash : `/${item.hash}`}
+                onClick={(e) => goToHash(e, item.hash, false)}
+                className="text-sm font-sans font-light text-cream hover:text-gold-light transition-colors duration-200 text-legible-on-media"
               >
                 {item.label}
               </a>
             ))}
             <a
-              href="#pilot-program"
-              onClick={(e) => {
-                e.preventDefault()
-                scrollToHash('#pilot-program')
-              }}
-              className="text-sm font-sans font-light px-5 py-2.5 rounded-sm bg-gold text-ink hover:bg-gold-light transition-colors duration-200"
+              href={isHome ? '#pilot-program' : '/#pilot-program'}
+              onClick={(e) => goToHash(e, '#pilot-program', false)}
+              className="text-sm font-sans font-light px-5 py-2.5 rounded-sm border border-gold/55 text-gold-light hover:bg-gold/10 hover:border-gold transition-colors duration-200 shrink-0"
             >
               Apply for Pilot Partnership
             </a>
@@ -124,25 +135,23 @@ export default function Navigation() {
         >
           {NAV_ITEMS.map((item) => (
             <a
-              key={item.href}
-              href={item.href}
+              key={item.hash}
+              href={isHome ? item.hash : `/${item.hash}`}
               className="font-display text-xl text-silver-cream"
               onClick={(e) => {
-                e.preventDefault()
                 setMobileOpen(false)
-                scrollToHash(item.href)
+                goToHash(e, item.hash, true)
               }}
             >
               {item.label}
             </a>
           ))}
           <a
-            href="#pilot-program"
-            className="mt-4 text-center text-sm font-light px-5 py-3 rounded-sm bg-gold text-ink"
+            href={isHome ? '#pilot-program' : '/#pilot-program'}
+            className="mt-4 text-center text-sm font-light px-5 py-3 rounded-sm border border-gold/55 text-gold-light hover:bg-gold/10"
             onClick={(e) => {
-              e.preventDefault()
               setMobileOpen(false)
-              scrollToHash('#pilot-program')
+              goToHash(e, '#pilot-program', true)
             }}
           >
             Apply for Pilot Partnership

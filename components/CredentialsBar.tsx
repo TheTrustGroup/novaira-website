@@ -11,7 +11,7 @@ export default function CredentialsBar() {
       aria-label="Certifications and product facts"
     >
       <div className="max-w-6xl mx-auto px-5 sm:px-8 py-4 sm:py-5">
-        <p className="font-sans font-extralight text-xs sm:text-sm text-cream text-center tracking-[0.12em] uppercase">
+        <p className="font-sans font-light text-xs sm:text-sm text-cream text-center tracking-[0.12em] uppercase text-legible-on-ink">
           {ITEMS.join('  ·  ')}
         </p>
       </div>
