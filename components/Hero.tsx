@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * Job: State what NOVAIRA is, proof points, timeline, single pilot CTA — video or ink + mark fallback.
+ * Job: Headline + deployment context + pilot CTA. Certifications live in CredentialsBar only.
  */
 import { useState } from 'react'
 import { NovairaLogo } from '@/components/NovairaLogo'
@@ -64,9 +64,7 @@ export default function Hero() {
           Designed for the spaces that demand excellence.
         </h1>
         <p className="font-sans font-light text-base sm:text-lg text-cream max-w-2xl mx-auto mb-10 sm:mb-12 leading-relaxed text-legible-on-media">
-          CE &amp; ISO 9001 certified. Silent. Medical grade.
-          <br />
-          Deploying Q3 2026.
+          Founding institutional partnerships · Q3 2026 deployment.
         </p>
         <button
           type="button"
