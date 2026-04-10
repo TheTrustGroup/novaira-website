@@ -4,6 +4,7 @@ import Navigation from '@/components/Navigation'
 import Hero from '@/components/Hero'
 import CredentialsBar from '@/components/CredentialsBar'
 import HowItWorks from '@/components/HowItWorks'
+import ProofStrip from '@/components/ProofStrip'
 import PilotProgram from '@/components/PilotProgram'
 import FounderSection from '@/components/FounderSection'
 import ContactSection from '@/components/ContactSection'
@@ -38,6 +39,7 @@ export default function Home() {
         <Hero />
         <CredentialsBar />
         <HowItWorks />
+        <ProofStrip />
         <PilotProgram />
         <FounderSection />
         <ContactSection />
