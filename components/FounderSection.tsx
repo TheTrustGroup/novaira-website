@@ -4,6 +4,7 @@
  * Job: Face, name, one line. No em dash stack.
  */
 import { useState } from 'react'
+import Image from 'next/image'
 import { useRevealOnScroll } from '@/hooks/useRevealOnScroll'
 
 const FOUNDER_IMAGE = '/images/founder-josephine.jpg'
@@ -18,7 +19,7 @@ export default function FounderSection() {
       className="reveal-on-scroll py-24 sm:py-32 px-6 sm:px-10"
       aria-labelledby="founder-heading"
     >
-      <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-12 sm:gap-16">
+      <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-start sm:items-start gap-10 sm:gap-14">
         <div className="shrink-0 mx-auto sm:mx-0">
           {imgError ? (
             <div
@@ -28,14 +29,13 @@ export default function FounderSection() {
               JT
             </div>
           ) : (
-            <img
+            <Image
               src={FOUNDER_IMAGE}
               alt="Josephine Turkson, founder of NOVAIRA"
               width={160}
               height={160}
               className="w-36 h-36 sm:w-40 sm:h-40 rounded-full object-cover border border-gold/20"
-              loading="lazy"
-              decoding="async"
+              sizes="(min-width: 640px) 160px, 144px"
               onError={() => setImgError(true)}
             />
           )}
@@ -44,9 +44,14 @@ export default function FounderSection() {
           <h2 id="founder-heading" className="sr-only">
             Founder
           </h2>
-          <p className="font-sans text-sm text-gold-light/90 mb-3">Josephine Turkson, founder</p>
-          <p className="font-display text-lg sm:text-xl text-silver-cream/95 font-light leading-[1.55] tracking-[-0.02em]">
-            NOVAIRA rests on one premise: dignity deserves design.
+          <p className="font-sans text-xs uppercase tracking-[0.24em] text-gold-light/85 mb-4">
+            {"Founder's note"}
+          </p>
+          <p className="font-display text-[1.0625rem] sm:text-lg text-silver-cream/95 font-light leading-[1.7] tracking-[-0.01em] max-w-prose">
+            {"I started NOVAIRA because the places women spend the most time, homes, hotels, offices, hospitals, schools, still treat menstrual waste as an afterthought. The quiet expectation that you'll manage it yourself isn't dignity. It's the absence of care. I wanted NOVAIRA to be the product every one of those spaces should already have: quiet, medical-grade, and built to belong in any of them without fuss."}
+          </p>
+          <p className="font-sans text-sm text-cream/60 mt-5">
+            Josephine Turkson, founder
           </p>
         </div>
       </div>

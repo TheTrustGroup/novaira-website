@@ -1,6 +1,11 @@
 import { NextResponse } from 'next/server'
 import { supabaseAdmin } from '@/lib/supabase-admin'
 
+// Keep this off the prerender path — it hits Supabase on every request
+// and must not run during `next build`.
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 const FOUNDER_CAP = 50
 
 export async function GET() {

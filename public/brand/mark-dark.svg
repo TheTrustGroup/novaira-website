@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-105 -105 210 210" width="512" height="512" role="img" aria-label="NOVAIRA mark">
+  <title>NOVAIRA — Mark (dark theme)</title>
+  <defs>
+    <linearGradient id="g" x1="-1" y1="-1" x2="1" y2="1" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F2EEE8"/>
+      <stop offset="28%" stop-color="#E8C99A"/>
+      <stop offset="50%" stop-color="#C4956A"/>
+      <stop offset="72%" stop-color="#D4A87A"/>
+      <stop offset="100%" stop-color="#EDE4D4"/>
+    </linearGradient>
+  </defs>
+  <path d="M 78.286,-62.220 A 100,100 0 1 0 78.286,62.220 A 80,80 0 1 1 78.286,-62.220 Z" fill="rgba(196,149,106,0.08)"/>
+  <path d="M 78.286,-62.220 A 100,100 0 1 0 78.286,62.220" stroke="url(#g)" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+  <path d="M 78.286,-62.220 A 80,80 0 1 1 78.286,62.220" stroke="url(#g)" stroke-width="3.2" fill="none" stroke-linecap="round" opacity="0.72"/>
+  <circle cx="78.286" cy="-62.220" r="5" fill="#F2EEE8" opacity="0.92"/>
+  <circle cx="78.286" cy="62.220" r="5" fill="#EDE4D4" opacity="0.86"/>
+</svg>

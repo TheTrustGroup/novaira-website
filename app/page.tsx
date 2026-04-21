@@ -5,18 +5,24 @@ import Hero from '@/components/Hero'
 import CredentialsBar from '@/components/CredentialsBar'
 import HowItWorks from '@/components/HowItWorks'
 import ProofStrip from '@/components/ProofStrip'
-import PilotProgram from '@/components/PilotProgram'
+import FirstRelease from '@/components/FirstRelease'
 import FounderSection from '@/components/FounderSection'
 import ContactSection from '@/components/ContactSection'
+import StickyMobileCTA from '@/components/StickyMobileCTA'
 import Footer from '@/components/Footer'
+
+// Static at build with ISR. Nothing on the page is time-sensitive once
+// the pilot counter was removed, but we keep a short revalidate so copy
+// edits propagate quickly.
+export const revalidate = 60
 
 const productJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Product',
-  name: 'NOVAIRA series 1',
+  name: 'NOVAIRA 01',
   brand: { '@type': 'Brand', name: 'NOVAIRA' },
   description:
-    'CE and ISO 9001 certified menstrual hygiene disposal unit. Silent operation. Medical-grade materials for hotels, hospitals, schools, and offices.',
+    'Medical-grade menstrual hygiene disposal, made to belong in any space. CE and ISO 9001 certified.',
   category: 'Sanitary equipment',
   manufacturer: {
     '@type': 'Organization',
@@ -40,11 +46,12 @@ export default function Home() {
         <CredentialsBar />
         <HowItWorks />
         <ProofStrip />
-        <PilotProgram />
+        <FirstRelease />
         <FounderSection />
         <ContactSection />
         <Footer />
       </main>
+      <StickyMobileCTA />
     </>
   )
 }

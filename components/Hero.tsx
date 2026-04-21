@@ -7,9 +7,6 @@ import { useEffect, useRef, useState } from 'react'
 import { scrollToSectionId } from '@/lib/scrollToSection'
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion'
 
-/** First frame before decode; add `public/og-image.jpg` or `public/hero-poster.jpg` when available. */
-const VIDEO_POSTER = '/og-image.jpg'
-
 export default function Hero() {
   const reducedMotion = usePrefersReducedMotion()
   const sectionRef = useRef<HTMLElement>(null)
@@ -24,8 +21,8 @@ export default function Hero() {
     if (conn?.saveData) setSaveData(true)
   }, [])
 
-  const scrollToPilot = () => {
-    scrollToSectionId('#pilot-program')
+  const scrollToWaitlist = () => {
+    scrollToSectionId('#first-release')
   }
 
   const showVideo = !videoFailed && !reducedMotion && !saveData
@@ -51,6 +48,7 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
+      data-hero
       className="relative min-h-[100svh] flex flex-col items-center justify-center px-6 sm:px-12 pt-[5.75rem] pb-24 sm:pb-28"
       aria-label="Introduction"
     >
@@ -63,7 +61,7 @@ export default function Hero() {
               loop
               playsInline
               preload="metadata"
-              poster={VIDEO_POSTER}
+              aria-hidden
               className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 gpu-layer ${
                 videoReady ? 'opacity-100' : 'opacity-0'
               }`}
@@ -74,7 +72,6 @@ export default function Hero() {
               }
               onLoadedData={() => setVideoReady(true)}
               onError={() => setVideoFailed(true)}
-              aria-label="NOVAIRA product animation"
             >
               <source src="/novaira-hero-video.mp4" type="video/mp4" />
             </video>
@@ -97,17 +94,17 @@ export default function Hero() {
         style={reducedMotion ? undefined : { opacity: contentFade }}
       >
         <h1 className="font-display font-light text-[1.875rem] leading-[1.18] sm:text-4xl sm:leading-[1.15] md:text-5xl md:leading-[1.12] lg:text-[3.25rem] lg:leading-[1.1] text-silver-cream text-balance mb-8 sm:mb-10 md:mb-12 text-legible-on-media">
-          Menstrual hygiene disposal for spaces that refuse to compromise.
+          Menstrual hygiene disposal, made to belong in any space.
         </h1>
         <p className="font-sans font-normal text-[0.9375rem] sm:text-base text-cream/88 max-w-md mx-auto mb-12 sm:mb-14 leading-[1.75] text-legible-on-media">
-          Founding partnerships open for deployment in Q3 2026.
+          First release Q3 2026. For homes and institutions.
         </p>
         <button
           type="button"
-          onClick={scrollToPilot}
+          onClick={scrollToWaitlist}
           className="font-sans font-normal text-[0.8125rem] sm:text-sm tracking-[0.04em] uppercase px-9 py-3.5 sm:px-10 sm:py-4 rounded-sm bg-gold text-ink hover:bg-gold-light transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
         >
-          Apply for pilot
+          Join the waitlist
         </button>
       </div>
     </section>

@@ -9,8 +9,8 @@ const FACTS = [
   'CE marking where applicable for safety and EMC; certificates available on request.',
   'ISO 9001:2015 quality management at the organisation level.',
   'Medical-grade materials chosen for hygiene-critical environments.',
-  'Designed for quiet operation in guest-facing and clinical spaces.',
-  'Founding pilot installations targeted for Q3 2026.',
+  'Designed for quiet operation in homes, guest-facing, and clinical spaces.',
+  'First release ships Q3 2026. Waitlist is open.',
 ] as const
 
 export default function ProofStrip() {

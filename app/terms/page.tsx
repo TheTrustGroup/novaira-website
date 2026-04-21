@@ -5,7 +5,7 @@ import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'Terms of Service — NOVAIRA',
+  title: 'Terms of Service | NOVAIRA',
   description: 'Terms of Service for using the NOVAIRA website and series 1 product services.',
 }
 

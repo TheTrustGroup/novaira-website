@@ -1,4 +1,5 @@
 import { Resend } from 'resend'
+import { logNotification } from '@/lib/notifications'
 
 function getResend(): Resend {
   const key = process.env.RESEND_API_KEY
@@ -14,6 +15,10 @@ export type ConsultationNotificationData = {
   facilities?: string
   timeline?: string
   message?: string
+  phone?: string
+  // Set by the caller after `upsertLead` so the audit row can be joined
+  // back to the lead. Optional because email delivery doesn't depend on it.
+  leadId?: string | null
 }
 
 const INSTITUTION_LABELS: Record<string, string> = {
@@ -21,36 +26,47 @@ const INSTITUTION_LABELS: Record<string, string> = {
   hospital: 'Hospital / Healthcare',
   school: 'School / Education',
   office: 'Corporate Office',
-  home: 'Private Residence',
+  home: 'Home / Residence',
   other: 'Other',
 }
 
 const TIMELINE_LABELS: Record<string, string> = {
   within_1_month: 'Within 1 month',
-  '1_3_months': '1–3 months',
-  '3_6_months': '3–6 months',
+  '1_3_months': '1 to 3 months',
+  '3_6_months': '3 to 6 months',
   exploring: 'Exploring options',
 }
+
+const CONSULTATION_KIND = 'consultation_notification'
 
 export async function sendConsultationNotification(
   data: ConsultationNotificationData
 ): Promise<{ success: boolean; error?: string }> {
   const to = process.env.NOTIFICATION_EMAIL
-  if (!to) {
-    console.warn('NOTIFICATION_EMAIL not set; skipping consultation email')
-    return { success: true }
-  }
-  if (!process.env.RESEND_API_KEY) {
-    console.warn('RESEND_API_KEY not set; skipping consultation email')
+  const hasApiKey = Boolean(process.env.RESEND_API_KEY)
+
+  if (!to || !hasApiKey) {
+    const reason = !to ? 'NOTIFICATION_EMAIL not set' : 'RESEND_API_KEY not set'
+    console.warn(`${reason}; skipping consultation email`)
+    await logNotification({
+      channel: 'email',
+      kind: CONSULTATION_KIND,
+      status: 'skipped',
+      recipient: to ?? null,
+      leadId: data.leadId,
+      error: reason,
+    })
+    // Skipping is not an error from the caller's perspective — the form
+    // still succeeded, we just have nowhere to send.
     return { success: true }
   }
 
   const institutionLabel = data.institution_type
     ? INSTITUTION_LABELS[data.institution_type] ?? data.institution_type
-    : '—'
+    : '-'
   const timelineLabel = data.timeline
     ? TIMELINE_LABELS[data.timeline] ?? data.timeline
-    : '—'
+    : '-'
 
   const html = `
 <!DOCTYPE html>
@@ -61,9 +77,10 @@ export async function sendConsultationNotification(
   <table style="width: 100%; border-collapse: collapse;">
     <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee;"><strong>Name</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${escapeHtml(data.name)}</td></tr>
     <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee;"><strong>Email</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;"><a href="mailto:${escapeHtml(data.email)}">${escapeHtml(data.email)}</a></td></tr>
+    ${data.phone ? `<tr><td style="padding: 8px 0; border-bottom: 1px solid #eee;"><strong>Phone</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;"><a href="tel:${escapeHtml(data.phone)}">${escapeHtml(data.phone)}</a></td></tr>` : ''}
     <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee;"><strong>Organization</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${escapeHtml(data.organization)}</td></tr>
     <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee;"><strong>Type of institution</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${escapeHtml(institutionLabel)}</td></tr>
-    <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee;"><strong>Bathrooms / facilities</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${escapeHtml(data.facilities || '—')}</td></tr>
+    <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee;"><strong>Bathrooms / facilities</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${escapeHtml(data.facilities || '-')}</td></tr>
     <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee;"><strong>Timeline</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${escapeHtml(timelineLabel)}</td></tr>
   </table>
   ${data.message ? `<p style="margin-top: 20px;"><strong>Message:</strong></p><p style="white-space: pre-wrap; background: #f5f5f5; padding: 12px; border-radius: 8px;">${escapeHtml(data.message)}</p>` : ''}
@@ -74,20 +91,46 @@ export async function sendConsultationNotification(
 
   try {
     const resend = getResend()
-    const { error } = await resend.emails.send({
+    const { data: result, error } = await resend.emails.send({
       from: process.env.RESEND_FROM_EMAIL ?? 'NOVAIRA <onboarding@resend.dev>',
       to: [to],
       subject: `Consultation request: ${data.name} (${data.organization})`,
       html,
     })
+
     if (error) {
       console.error('Resend error:', error)
+      await logNotification({
+        channel: 'email',
+        kind: CONSULTATION_KIND,
+        status: 'failed',
+        recipient: to,
+        leadId: data.leadId,
+        error: error.message,
+      })
       return { success: false, error: error.message }
     }
+
+    await logNotification({
+      channel: 'email',
+      kind: CONSULTATION_KIND,
+      status: 'sent',
+      recipient: to,
+      leadId: data.leadId,
+      providerId: result?.id ?? null,
+    })
     return { success: true }
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown error'
     console.error('sendConsultationNotification error:', err)
+    await logNotification({
+      channel: 'email',
+      kind: CONSULTATION_KIND,
+      status: 'failed',
+      recipient: to,
+      leadId: data.leadId,
+      error: message,
+    })
     return { success: false, error: message }
   }
 }

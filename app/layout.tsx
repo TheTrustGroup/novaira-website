@@ -5,7 +5,7 @@ import './globals.css'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
-  weight: ['300', '400'],
+  weight: ['300'],
   variable: '--font-cormorant',
   display: 'swap',
   preload: true,
@@ -13,7 +13,7 @@ const cormorant = Cormorant_Garamond({
 
 const jost = Jost({
   subsets: ['latin'],
-  weight: ['200', '300', '400'],
+  weight: ['300', '400'],
   variable: '--font-jost',
   display: 'swap',
   preload: true,
@@ -21,17 +21,22 @@ const jost = Jost({
 
 export const metadata: Metadata = {
   title: {
-    default: 'NOVAIRA — Menstrual hygiene disposal for institutional spaces',
+    default: 'NOVAIRA | Medical-grade menstrual hygiene disposal',
     template: '%s | NOVAIRA',
   },
   description:
-    'CE and ISO 9001 certified menstrual hygiene disposal. Silent, medical-grade materials. Founding pilot partners: Q3 2026.',
+    'Medical-grade menstrual hygiene disposal, made to belong in any space. CE and ISO 9001 certified. First release Q3 2026. Join the waitlist.',
   keywords: [
     'menstrual hygiene disposal',
     'sanitary waste disposal',
+    'period product disposal',
+    'home menstrual disposal',
+    'residential sanitary bin',
     'CE certified disposal',
     'hotel hygiene',
     'hospital sanitary disposal',
+    'office sanitary disposal',
+    'school sanitary disposal',
   ],
   authors: [{ name: 'NOVAIRA' }],
   creator: 'NOVAIRA',
@@ -39,20 +44,19 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.novairaworld.com'),
   alternates: { canonical: 'https://www.novairaworld.com' },
   openGraph: {
-    title: 'NOVAIRA — Institutional menstrual hygiene disposal',
+    title: 'NOVAIRA | Medical-grade menstrual hygiene disposal',
     description:
-      'CE and ISO 9001 certified. Silent operation. Medical-grade materials. Q3 2026 deployment.',
+      'Medical-grade menstrual hygiene disposal, made to belong in any space. CE and ISO 9001 certified. First release Q3 2026.',
     type: 'website',
     url: 'https://www.novairaworld.com',
     locale: 'en_US',
     siteName: 'NOVAIRA',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'NOVAIRA' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'NOVAIRA',
-    description: 'CE and ISO 9001 certified menstrual hygiene disposal for institutional spaces.',
-    images: ['/og-image.jpg'],
+    description:
+      'Medical-grade menstrual hygiene disposal, made to belong in any space. CE and ISO 9001 certified.',
   },
   robots: { index: true, follow: true },
 }
@@ -61,7 +65,8 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#1a1a1a',
+  // Brand ink — matches tailwind.config.js `ink` token and the favicon ground.
+  themeColor: '#09070A',
 }
 
 export default function RootLayout({

@@ -5,12 +5,11 @@ import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy — NOVAIRA',
-  description: 'Privacy Policy for NOVAIRA and series 1. How we collect, use, and protect your data.',
+  title: 'Privacy Policy | NOVAIRA',
+  description: 'How NOVAIRA collects, uses, and protects the data you submit through this website.',
 }
 
 const CONTACT_EMAIL = 'office@novairaworld.com'
-const JURISDICTION = '[Ghana / UK / US]' // Replace with your chosen jurisdiction
 
 export default function PrivacyPage() {
   return (
@@ -23,65 +22,79 @@ export default function PrivacyPage() {
             <h1 className="text-4xl sm:text-5xl font-display text-silver-cream mb-4 font-light text-legible-on-ink">
               Privacy Policy
             </h1>
-            <p className="text-cream/80 font-light text-sm mb-12">
-              Last updated: February 2025
-            </p>
+            <p className="text-cream/80 font-light text-sm mb-12">Last updated: April 2026</p>
 
             <div className="prose prose-invert max-w-none space-y-8 text-cream font-light leading-relaxed">
               <section>
                 <h2 className="text-2xl font-display text-gold-light mb-3 font-light text-legible-on-ink">
-                  What data we collect
+                  What we collect
                 </h2>
-                <p>
-                  When you use our website or request a consultation, we may collect:
-                </p>
+                <p>When you contact us or submit a form on this website we collect:</p>
                 <ul className="list-disc pl-6 space-y-2 text-cream/85">
-                  <li>Email address</li>
-                  <li>Name</li>
-                  <li>Organization (if you provide it)</li>
-                  <li>Any other information you voluntarily submit through our forms</li>
+                  <li>Your name, email, organisation, and type of space.</li>
+                  <li>
+                    Anything you voluntarily include in the free-text fields (message, timeline, facilities count).
+                  </li>
+                  <li>
+                    Your IP address, recorded briefly for abuse prevention and rate limiting.
+                  </li>
+                  <li>
+                    Basic analytics (page views, referrer, device class) via PostHog. We do not collect identified
+                    profiles for anonymous visitors.
+                  </li>
                 </ul>
               </section>
 
               <section>
                 <h2 className="text-2xl font-display text-gold-light mb-3 font-light text-legible-on-ink">
-                  How we use your data
+                  How we use it
                 </h2>
                 <p>
-                  We use the information you provide to contact you about NOVAIRA and our services, to respond to your enquiries, and to improve our offerings. We do not use your data for purposes unrelated to NOVAIRA without your consent.
+                  We use your information to respond to your enquiry, to decide whether NOVAIRA is a fit for your
+                  space, and to improve this website. We do not use it for any unrelated purpose without your
+                  consent.
                 </p>
               </section>
 
               <section>
                 <h2 className="text-2xl font-display text-gold-light mb-3 font-light text-legible-on-ink">
-                  We do not sell your data
+                  Who we share it with
                 </h2>
-                <p>
-                  We do not sell, rent, or trade your personal information to third parties. Your data is used only as described in this policy.
+                <p>We do not sell, rent, or trade your personal information. We share it only with:</p>
+                <ul className="list-disc pl-6 space-y-2 text-cream/85">
+                  <li>Supabase (EU region), which stores our lead database on our behalf.</li>
+                  <li>Resend, which delivers the notification email to the NOVAIRA team.</li>
+                  <li>PostHog, which processes aggregate product analytics.</li>
+                </ul>
+                <p className="mt-3">
+                  Each of these processors is bound by their own data-processing terms.
                 </p>
               </section>
 
               <section>
                 <h2 className="text-2xl font-display text-gold-light mb-3 font-light text-legible-on-ink">
-                  Data requests and contact
+                  Your rights
                 </h2>
                 <p>
-                  For requests about your data (access, correction, deletion, or other privacy concerns), please contact us at:{' '}
+                  You can ask us to confirm what we hold about you, correct it, export it, or delete it. Write to us
+                  at{' '}
                   <a
                     href={`mailto:${CONTACT_EMAIL}`}
                     className="text-gold hover:text-gold-light transition-colors underline focus:outline-none focus:ring-2 focus:ring-gold-light focus:ring-offset-2 focus:ring-offset-ink rounded-sm"
                   >
                     {CONTACT_EMAIL}
-                  </a>
+                  </a>{' '}
+                  and we will reply within a reasonable time.
                 </p>
               </section>
 
               <section>
                 <h2 className="text-2xl font-display text-gold-light mb-3 font-light text-legible-on-ink">
-                  Governing law
+                  Retention
                 </h2>
                 <p>
-                  This Privacy Policy is governed by the laws of {JURISDICTION}. By using our website, you agree to the application of these laws to the extent applicable.
+                  We retain contact records for as long as we are in conversation with you and for a reasonable
+                  period afterwards, unless you ask us to delete them sooner.
                 </p>
               </section>
 

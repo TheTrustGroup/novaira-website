@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-105 -105 210 210" width="512" height="512" role="img" aria-label="NOVAIRA mark">
+  <title>NOVAIRA — Monochrome gold (emboss / foil)</title>
+  <path d="M 78.286,-62.220 A 100,100 0 1 0 78.286,62.220 A 80,80 0 1 1 78.286,-62.220 Z" fill="none" stroke="#C4956A" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M 78.286,-62.220 A 80,80 0 1 1 78.286,62.220" stroke="#C4956A" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <circle cx="78.286" cy="-62.220" r="7" fill="#C4956A" opacity="0.85"/>
+  <circle cx="78.286" cy="62.220" r="7" fill="#C4956A" opacity="0.75"/>
+</svg>

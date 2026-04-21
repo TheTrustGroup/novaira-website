@@ -1,20 +1,22 @@
 'use client'
 
 /**
- * Job: Quiet wayfinding only. No second CTA (hero and pilot carry conversion).
+ * Job: Quiet wayfinding only. No second CTA (hero and first release carry conversion).
  */
 import { useEffect, useState, type MouseEvent } from 'react'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { scrollToSectionId, scrollToSectionIdAfterLayout } from '@/lib/scrollToSection'
+import Logo from '@/components/Logo'
 
 const NAV_ITEMS = [
   { label: 'How it works', hash: '#how-it-works' as const },
-  { label: 'Pilot', hash: '#pilot-program' as const },
+  { label: 'First release', hash: '#first-release' as const },
   { label: 'Contact', hash: '#contact' as const },
 ] as const
 
 export default function Navigation() {
   const pathname = usePathname()
+  const router = useRouter()
   const isHome = pathname === '/'
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -35,7 +37,8 @@ export default function Navigation() {
   function goToHash(e: MouseEvent<HTMLAnchorElement>, hash: string, defer: boolean) {
     e.preventDefault()
     if (!isHome) {
-      window.location.assign(`/${hash}`)
+      // Client-side nav back to home; HomeHashScroll handles the scroll once mounted.
+      router.push(`/${hash}`)
       return
     }
     if (defer) {
@@ -59,7 +62,7 @@ export default function Navigation() {
         >
           <a
             href="/"
-            className="isolate flex items-center gap-3.5 min-w-0 shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-ink rounded-sm"
+            className="isolate flex items-center min-w-0 shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-ink rounded-sm"
             onClick={(e) => {
               if (typeof window !== 'undefined' && window.location.pathname === '/') {
                 e.preventDefault()
@@ -68,9 +71,7 @@ export default function Navigation() {
             }}
             aria-label="NOVAIRA home"
           >
-            <span className="font-display text-[1.0625rem] sm:text-lg font-light tracking-[0.02em] text-silver-cream/95 text-legible-on-media">
-              NOVAIRA
-            </span>
+            <Logo variant="horizontal" title={null} />
           </a>
 
           <div className="hidden md:flex items-center gap-10 lg:gap-12">
